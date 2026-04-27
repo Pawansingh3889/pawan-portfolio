@@ -267,7 +267,7 @@
         <div class="fullname">~/import pawan_singh_kapkoti</div>
         <div class="role">Data Engineer<span class="pipe">|</span></div>
         <p class="lead">I build robust data pipelines, developer tools, and local AI for food manufacturing. Working in Yorkshire, shipping code on the side. I believe compliance shouldn't mean spreadsheets and AI shouldn't require the cloud.</p>
-        <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=600&color=00D4FF&width=620&lines=Building+for+food+manufacturing+from+Yorkshire+UK;Maintainer+of+sql-sop%2C+pr-sop%2C+morning-brief+on+PyPI;Local+AI+for+factories.+No+cloud.+No+API+keys.;Read+the+source.+Find+the+gap.+Ship+the+fix." alt="What I do" style="margin-bottom: 1.5rem; max-width: 100%; height: auto;"/>
+        <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=600&color=00D4FF&width=620&lines=Building+for+food+manufacturing+from+Yorkshire+UK;Maintainer+of+sql-sop%2C+sql-sop-mcp%2C+pr-sop%2C+morning-brief;Collaborator+on+drt+%E2%80%94+the+multi-source+sync+engine;Local+AI+for+factories.+No+cloud.+No+API+keys." alt="What I do" style="margin-bottom: 1.5rem; max-width: 100%; height: auto;"/>
         <div class="hero-cta">
             <a href="#contact" class="pill primary">Get in touch</a>
             <a href="https://github.com/Pawansingh3889" class="pill">GitHub</a>
@@ -288,7 +288,7 @@
             <div>
                 <div class="profile-block">
                     <h3>// BUILD</h3>
-                    <p>I build data pipelines for food manufacturing — incremental ETL from ERP systems, dbt marts with SLO monitoring, and Power BI consumption layers. Three Python tools live on PyPI (sql-sop, pr-sop, morning-brief), each with a real problem behind it that I hit on the floor before writing a line of code.</p>
+                    <p>I build data pipelines for food manufacturing — incremental ETL from ERP systems, dbt marts with SLO monitoring, and Power BI consumption layers. Four Python tools live on PyPI (sql-sop, sql-sop-mcp, pr-sop, morning-brief), each with a real problem behind it that I hit on the floor before writing a line of code.</p>
                 </div>
                 <div class="profile-block">
                     <h3>// DEPLOY</h3>
@@ -402,9 +402,9 @@
             <div class="project-card">
                 <div class="num">_04</div>
                 <h3>sql-sop</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-guard">Code</a> · <a href="https://pypi.org/project/sql-sop/">PyPI</a> · <a href="https://pawansingh3889.github.io/sql-guard/">Playground</a></div>
-                <p>Fast rule-based SQL linter. 38 rules (5 T-SQL specific), 149 tests, libCST-based injection scanner, inline disable directives, <code>.sql-guard.yml</code> config, SARIF output for GitHub Code Scanning. Runs as CLI, pre-commit hook, or GitHub Action. 500+ monthly downloads.</p>
-                <div class="stats">38 rules · 149 tests · libCST scanner · SARIF · v0.6.1</div>
+                <div class="links"><a href="https://github.com/Pawansingh3889/sql-guard">Code</a> · <a href="https://pypi.org/project/sql-sop/">PyPI</a> · <a href="https://pawansingh3889.github.io/sql-guard/">Playground</a> · <a href="https://github.com/Pawansingh3889/sql-guard/blob/main/ROADMAP.md">Roadmap</a></div>
+                <p>Fast rule-based SQL linter. 39 rules (5 T-SQL specific), 152 tests, libCST-based injection scanner, inline disable directives, <code>.sql-guard.yml</code> config, SARIF output for GitHub Code Scanning. v0.7 milestone in progress (Performance Rules Pack); three external authors merged. <a href="https://pypi.org/project/sql-sop-mcp/">sql-sop-mcp</a> ships the same linter as an MCP server for Claude Desktop / Cursor / ChatGPT. 500+ monthly downloads.</p>
+                <div class="stats">39 rules · 152 tests · libCST scanner · SARIF · v0.6.1 · v0.7 in progress</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">libCST</span><span class="badge">Typer</span><span class="badge">Rich</span><span class="badge">pre-commit</span>
                 </div>
@@ -561,8 +561,8 @@
                         <img src="https://www.google.com/s2/favicons?domain=github.com/drt-hub&sz=64" alt=""/>
                         <h3>drt-hub/drt</h3>
                     </div>
-                    <div class="meta">Triage Collaborator — multi-sync orchestration, connectors, tutorial</div>
-                    <p>Shipped multi-sync orchestration (<code>drt run --all</code>, <code>--select tag:</code>, <code>--threads N</code>) with a thread-safe StateManager and 11 parallel-dispatch tests. Plus 5 destination connectors, the official connector tutorial, Docker support, and pre-commit hooks — all merged.</p>
+                    <div class="meta">Collaborator — destinations, --threads, --quiet, json_columns review</div>
+                    <p>Collaborator on the multi-source data sync engine across three releases. v0.5: 5 destination connectors and the official connector tutorial. v0.6: <code>--threads N</code> parallel orchestration with thread-safe StateManager, 11 parallel-dispatch tests. v0.7: <code>--quiet</code> for CI/cron use cases (approved). Plus reviewer voice on the json_columns config PR where the early-validation suggestion shaped the final implementation.</p>
                 </div>
             </div>
             <div class="num-card">
@@ -572,8 +572,8 @@
                         <img src="https://www.google.com/s2/favicons?domain=pypi.org&sz=64" alt=""/>
                         <h3>sql-sop</h3>
                     </div>
-                    <div class="meta">Maintainer — review queue, releases, governance</div>
-                    <p>Review and merge community PRs (W011 union-without-all, W012 group-by-ordinal, W005-template adoption), publish to PyPI, maintain governance + security policy, triage issues. First-PR-wins soft-assignment policy in place.</p>
+                    <div class="meta">Maintainer — review queue, releases, contributor funnel</div>
+                    <p>Review and merge community PRs across the rule catalogue. Recent merges: W013 window-without-partition (Prabhu-1409), W019 count-distinct-unbounded (mvanhorn), W011 union-without-all and P005 sqlalchemy-text-fstring (tmchow). Publish to PyPI via Trusted Publishing, maintain governance + security policy, run a v0.7 milestone with public ROADMAP and a scaffold script for new contributors. Two more rule PRs in active review.</p>
                 </div>
             </div>
             <div class="num-card">
