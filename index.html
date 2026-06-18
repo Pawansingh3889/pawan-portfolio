@@ -423,6 +423,17 @@
 
             <div class="project-card">
                 <div class="num">_06</div>
+                <h3>query-warden</h3>
+                <div class="links"><a href="https://github.com/Pawansingh3889/query-warden">Code</a></div>
+                <p>Role-based access control for SQL. Define roles in YAML (allowed domains and tables, denied columns); it parses each query with sqlglot, pulls the tables and columns it touches, and blocks anything outside the role before it runs. No database connection, pure function. The access layer the other guards were missing.</p>
+                <div class="stats">YAML policy · sqlglot · deny columns · CLI · read-only</div>
+                <div class="badges">
+                    <span class="badge">Python</span><span class="badge">sqlglot</span><span class="badge">RBAC</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="num">_07</div>
                 <h3>Manufacturing Compliance Dashboard</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
                 <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
@@ -433,7 +444,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_07</div>
+                <div class="num">_08</div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
                 <p>End-to-end data pipeline. Police UK API to PostgreSQL and BigQuery. 6 dbt marts (outcome analysis, YoY trends), 65 tests. Polars-based alternative ingestion. Declarative validation, SLO monitoring, pipeline maturity scorecard.</p>
@@ -444,7 +455,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_08</div>
+                <div class="num">_09</div>
                 <h3>sql-sop</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-guard">Code</a> · <a href="https://pypi.org/project/sql-sop/">PyPI</a> · <a href="https://pawansingh3889.github.io/sql-guard/">Playground</a> · <a href="https://github.com/Pawansingh3889/sql-guard/blob/main/ROADMAP.md">Roadmap</a></div>
                 <p>Fast rule-based SQL linter. 39 rules (5 T-SQL specific), 152 tests, libCST-based injection scanner, inline disable directives, <code>.sql-guard.yml</code> config, SARIF output for GitHub Code Scanning. v0.7 milestone in progress (Performance Rules Pack); three external authors merged. <a href="https://pypi.org/project/sql-sop-mcp/">sql-sop-mcp</a> ships the same linter as an MCP server for Claude Desktop / Cursor / ChatGPT. 500+ monthly downloads.</p>
@@ -455,7 +466,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_09</div>
+                <div class="num">_10</div>
                 <h3>pr-sop</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/pr-sop">Code</a> · <a href="https://pypi.org/project/pr-sop/">PyPI</a></div>
                 <p>Opinionated PR governance checks. CHANGELOG drift, version consistency between pyproject.toml and __init__.py, stale rev: pins in READMEs. Three config-driven checks turned on via a YAML block. CLI, pre-commit hook, or GitHub Action. First external consumer: sql-sop itself.</p>
@@ -466,7 +477,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_10</div>
+                <div class="num">_11</div>
                 <h3>morning-brief</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/morning-brief">Code</a> · <a href="https://pypi.org/project/morning-brief/">PyPI</a></div>
                 <p>Rule-based daily Gmail triage. Zero LLM, read-only OAuth. Classifies the last day of mail into HIGH / MEDIUM / LOW / SPAM via YAML rules, writes a markdown digest, fires a desktop toast. v0.3.0 adds sub-day windows, thread collapse, and <code>preview</code> / <code>why</code> commands.</p>
@@ -477,7 +488,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_11</div>
+                <div class="num">_12</div>
                 <h3>SQL Ops Reviewer</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">Code</a></div>
                 <p>GitHub Action that auto-reviews .sql files in pull requests using local AI. Catches injection risks, performance anti-patterns, style violations. Posts structured review comments with fix suggestions. One YAML file to set up, runs on the CI runner, zero API keys.</p>
@@ -488,7 +499,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_12</div>
+                <div class="num">_13</div>
                 <h3>MediAsk</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/Hackathon-mediask">Code</a> · <a href="https://hackathon-ioqp.onrender.com">Live</a></div>
                 <p>Health Q&A platform for factory workers. NHS-verified guidance, Gemini AI responses, voice input, 18 languages. Flask + PostgreSQL, Dockerised.</p>
