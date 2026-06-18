@@ -370,8 +370,8 @@
                 <div class="num">_01</div>
                 <h3>Governed Agent Stack</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/governed-agent-stack">Code</a></div>
-                <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Five small tools compose into one stack: schema-scout maps the data, sql-explorer-mcp and sql-sop fence in read-only access, FloorMind reasons, and agent-blackbox keeps a tamper-evident record. Nothing leaves the building.</p>
-                <div class="stats">5 tools · on-prem · read-only · tamper-evident audit</div>
+                <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Eight small tools compose into one stack: schema-scout maps the data, sql-explorer-mcp / sql-sop / query-warden fence in read-only, role-checked access, FloorMind reasons, pii-veil masks results, and agent-blackbox keeps a tamper-evident record. The sql-steward flagship bundles them behind one MCP server where the agent never writes SQL. Nothing leaves the building.</p>
+                <div class="stats">8 tools · on-prem · read-only · tamper-evident audit</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">MCP</span><span class="badge">Ollama</span><span class="badge">SQL Server</span>
                 </div>
@@ -379,6 +379,17 @@
 
             <div class="project-card">
                 <div class="num">_02</div>
+                <h3>sql-steward</h3>
+                <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a></div>
+                <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, the same tools work across SQL Server, Postgres, and SQLite, and query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
+                <div class="stats">semantic layer · no raw SQL · 3 engines · PII refusal · audit</div>
+                <div class="badges">
+                    <span class="badge">Python</span><span class="badge">FastMCP</span><span class="badge">sqlglot</span><span class="badge">SQLAlchemy</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="num">_03</div>
                 <h3>FloorMind</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/FloorMind">Code</a> · <a href="https://pawansingh3889.github.io/FloorMind/">Docs</a></div>
                 <p>On-prem natural-language-to-SQL over manufacturing data. A LangGraph agent turns plain English into a checked query and answer in seconds, served by a local LLM via Ollama. Every query is linted by sql-sop and written to a tamper-evident agent-blackbox ledger. Eval-measured, not vibes.</p>
@@ -389,7 +400,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_03</div>
+                <div class="num">_04</div>
                 <h3>agent-blackbox</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/agent-blackbox">Code</a></div>
                 <p>An append-only, hash-chained ledger that gives AI agent actions a tamper-evident audit trail. Each row stores the hash of the row before it, so any edit after the fact breaks the chain and <code>verify()</code> points at it. Optional HMAC keying. On-prem, zero dependencies, a single SQLite file.</p>
@@ -400,7 +411,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_04</div>
+                <div class="num">_05</div>
                 <h3>schema-scout</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/schema-scout">Code</a></div>
                 <p>Reverse-engineers a large SQL Server database (150+ tables) into an AI-ready catalog: infers undeclared foreign keys, flags PII, scores how agent-ready the schema is, traces join paths, and renders an offline dashboard. Serves the catalog to an agent over MCP. Runs entirely on-prem.</p>
@@ -411,7 +422,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_05</div>
+                <div class="num">_06</div>
                 <h3>sql-explorer-mcp</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">Code</a> · <a href="https://pypi.org/project/sql-explorer-mcp/">PyPI</a></div>
                 <p>Read-only Model Context Protocol server for SQL Server, Postgres, and SQLite. Lets an LLM introspect and query a database through a three-layer safety stack: connection-level read-only, a sqlglot SELECT-only parser, and a sql-sop lint pass. Multi-server from one config.</p>
@@ -422,7 +433,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_06</div>
+                <div class="num">_07</div>
                 <h3>query-warden</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/query-warden">Code</a></div>
                 <p>Role-based access control for SQL. Define roles in YAML (allowed domains and tables, denied columns); it parses each query with sqlglot, pulls the tables and columns it touches, and blocks anything outside the role before it runs. No database connection, pure function. The access layer the other guards were missing.</p>
@@ -433,7 +444,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_07</div>
+                <div class="num">_08</div>
                 <h3>Manufacturing Compliance Dashboard</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
                 <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
@@ -444,7 +455,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_08</div>
+                <div class="num">_09</div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
                 <p>End-to-end data pipeline. Police UK API to PostgreSQL and BigQuery. 6 dbt marts (outcome analysis, YoY trends), 65 tests. Polars-based alternative ingestion. Declarative validation, SLO monitoring, pipeline maturity scorecard.</p>
@@ -455,7 +466,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_09</div>
+                <div class="num">_10</div>
                 <h3>sql-sop</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-guard">Code</a> · <a href="https://pypi.org/project/sql-sop/">PyPI</a> · <a href="https://pawansingh3889.github.io/sql-guard/">Playground</a> · <a href="https://github.com/Pawansingh3889/sql-guard/blob/main/ROADMAP.md">Roadmap</a></div>
                 <p>Fast rule-based SQL linter. 39 rules (5 T-SQL specific), 152 tests, libCST-based injection scanner, inline disable directives, <code>.sql-guard.yml</code> config, SARIF output for GitHub Code Scanning. v0.7 milestone in progress (Performance Rules Pack); three external authors merged. <a href="https://pypi.org/project/sql-sop-mcp/">sql-sop-mcp</a> ships the same linter as an MCP server for Claude Desktop / Cursor / ChatGPT. 500+ monthly downloads.</p>
@@ -466,7 +477,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_10</div>
+                <div class="num">_11</div>
                 <h3>pr-sop</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/pr-sop">Code</a> · <a href="https://pypi.org/project/pr-sop/">PyPI</a></div>
                 <p>Opinionated PR governance checks. CHANGELOG drift, version consistency between pyproject.toml and __init__.py, stale rev: pins in READMEs. Three config-driven checks turned on via a YAML block. CLI, pre-commit hook, or GitHub Action. First external consumer: sql-sop itself.</p>
@@ -477,7 +488,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_11</div>
+                <div class="num">_12</div>
                 <h3>morning-brief</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/morning-brief">Code</a> · <a href="https://pypi.org/project/morning-brief/">PyPI</a></div>
                 <p>Rule-based daily Gmail triage. Zero LLM, read-only OAuth. Classifies the last day of mail into HIGH / MEDIUM / LOW / SPAM via YAML rules, writes a markdown digest, fires a desktop toast. v0.3.0 adds sub-day windows, thread collapse, and <code>preview</code> / <code>why</code> commands.</p>
@@ -488,7 +499,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_12</div>
+                <div class="num">_13</div>
                 <h3>SQL Ops Reviewer</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">Code</a></div>
                 <p>GitHub Action that auto-reviews .sql files in pull requests using local AI. Catches injection risks, performance anti-patterns, style violations. Posts structured review comments with fix suggestions. One YAML file to set up, runs on the CI runner, zero API keys.</p>
@@ -499,7 +510,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_13</div>
+                <div class="num">_14</div>
                 <h3>MediAsk</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/Hackathon-mediask">Code</a> · <a href="https://hackathon-ioqp.onrender.com">Live</a></div>
                 <p>Health Q&A platform for factory workers. NHS-verified guidance, Gemini AI responses, voice input, 18 languages. Flask + PostgreSQL, Dockerised.</p>
