@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pawan Singh Kapkoti — Data & Analytics Engineer</title>
-    <meta name="description" content="Data engineer building pipelines, compliance tools, and local AI for food manufacturing. Yorkshire, UK.">
+    <meta name="description" content="Data engineer building on-prem pipelines and the governance layer that makes it safe to point an AI agent at a real database. Yorkshire, UK.">
     <meta property="og:title" content="Pawan Singh Kapkoti — Data & Analytics Engineer">
-    <meta property="og:description" content="Pipelines, compliance dashboards, and local AI for manufacturing.">
+    <meta property="og:description" content="On-prem data pipelines and governed AI: a semantic layer that compiles every query and a tamper-evident audit of what the agent did.">
     <meta property="og:type" content="website">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -65,7 +65,10 @@
         .hero .role { font-size: 1.6rem; font-weight: 600; color: var(--text); margin-bottom: 1.2rem; }
         .hero .role .pipe { color: var(--accent); animation: blink 1.1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
-        .hero p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 2rem; }
+        .hero p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 1.6rem; }
+        .proof { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+        .proof span { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.35rem 0.85rem; background: var(--surface); }
+        .proof span b { color: var(--accent); font-weight: 700; }
         .hero-cta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
         .pill { padding: 0.6rem 1.3rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.88rem; color: var(--text) !important; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
         .pill:hover { border-color: var(--accent); text-decoration: none !important; box-shadow: var(--accent-glow); transform: translateY(-1px); }
@@ -266,7 +269,13 @@
         <h1 class="bigname">PAWAN</h1>
         <div class="fullname">~/import pawan_singh_kapkoti</div>
         <div class="role">Data Engineer<span class="pipe">|</span></div>
-        <p class="lead">I build robust data pipelines, developer tools, and local AI for food manufacturing. Working in Yorkshire, shipping code on the side. I believe compliance shouldn't mean spreadsheets and AI shouldn't require the cloud.</p>
+        <p class="lead">I build the data platform and the governance layer that makes it safe to point an AI agent at a real database: on-prem pipelines, a semantic layer that compiles every query, and a tamper-evident record of what the agent did. Yorkshire-based, shipping tools on the side. Compliance shouldn't mean spreadsheets, and AI shouldn't require the cloud.</p>
+        <div class="proof">
+            <span>On-prem, <b>no cloud, no API keys</b></span>
+            <span>Semantic-layer <b>governed SQL</b></span>
+            <span><b>Tamper-evident</b> agent audit</span>
+            <span><b>PL-300</b> · MSc Data Analytics</span>
+        </div>
         <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=18&duration=2800&pause=600&color=00D4FF&width=620&lines=Building+for+food+manufacturing+from+Yorkshire+UK;Building+the+on-prem+governed+agent+stack%3A+map%2C+query%2C+audit;Collaborator+on+drt+%E2%80%94+the+multi-source+sync+engine;Local+AI+for+factories.+No+cloud.+No+API+keys." alt="What I do" style="margin-bottom: 1.5rem; max-width: 100%; height: auto;"/>
         <div class="hero-cta">
             <a href="#contact" class="pill primary">Get in touch</a>
@@ -292,7 +301,7 @@
                 </div>
                 <div class="profile-block">
                     <h3>// DEPLOY</h3>
-                    <p>Local AI for factories. LangGraph agents that talk to MCP servers, ChromaDB and pgvector RAG, Ollama-served models — all on-prem so no batch data leaves the building. A 5-stage SQL validation pipeline sits between the model and the database.</p>
+                    <p>Local AI for factories. LangGraph agents that talk to MCP servers, ChromaDB and pgvector RAG, Ollama-served models, all on-prem so no batch data leaves the building. Between the model and the database sits a schema-aware validation gate and a self-correcting repair loop, and every answer records the model and prompt that produced it, so an audited result can be reproduced.</p>
                 </div>
                 <div class="profile-block">
                     <h3>// CONTRIBUTE</h3>
@@ -370,8 +379,8 @@
                 <div class="num">_01</div>
                 <h3>Governed Agent Stack</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/governed-agent-stack">Code</a></div>
-                <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Eight small tools compose into one stack: schema-scout maps the data, sql-explorer-mcp / sql-sop / query-warden fence in read-only, role-checked access, FloorMind reasons, pii-veil masks results, and agent-blackbox keeps a tamper-evident record. The sql-steward flagship bundles them behind one MCP server where the agent never writes SQL. Nothing leaves the building.</p>
-                <div class="stats">8 tools · on-prem · read-only · tamper-evident audit</div>
+                <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Small tools compose into one governed plane: schema-scout maps the data, sql-steward compiles every query from a semantic layer, query-warden and pii-veil fence in role-checked access, and agent-blackbox keeps a tamper-evident record. The governance is the point, not another gateway: every call is authenticated, policy-checked, budgeted, and logged, and nothing leaves the building.</p>
+                <div class="stats">governed plane · RBAC · PII refusal · tamper-evident audit · on-prem</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">MCP</span><span class="badge">Ollama</span><span class="badge">SQL Server</span>
                 </div>
@@ -381,8 +390,8 @@
                 <div class="num">_02</div>
                 <h3>sql-steward</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a></div>
-                <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, the same tools work across SQL Server, Postgres, and SQLite, and query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
-                <div class="stats">semantic layer · no raw SQL · 3 engines · PII refusal · audit</div>
+                <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, declared data-quality checks gate the results, and <code>init --from-db</code> drafts a reviewable layer from a live schema so it scales past a toy database. Same tools across SQL Server, Postgres, and SQLite; query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
+                <div class="stats">semantic layer · no raw SQL · init --from-db · data-quality checks · 3 engines</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">FastMCP</span><span class="badge">sqlglot</span><span class="badge">SQLAlchemy</span>
                 </div>
@@ -392,8 +401,8 @@
                 <div class="num">_03</div>
                 <h3>FloorMind</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/FloorMind">Code</a> · <a href="https://pawansingh3889.github.io/FloorMind/">Docs</a></div>
-                <p>On-prem natural-language-to-SQL over manufacturing data. A LangGraph agent turns plain English into a checked query and answer in seconds, served by a local LLM via Ollama. Every query is linted by sql-sop and written to a tamper-evident agent-blackbox ledger. Eval-measured, not vibes.</p>
-                <div class="stats">LangGraph · local LLM · sql-sop lint · tamper-evident log · eval harness</div>
+                <p>On-prem natural-language-to-SQL over manufacturing data. A LangGraph agent turns plain English into a schema-validated query and answer in seconds, served by a local LLM via Ollama. One governed path: a validation gate, a self-correcting repair loop that feeds errors back to the model, and a tamper-evident agent-blackbox ledger that records the model and prompt behind every answer. Eval score tracked per release, not vibes.</p>
+                <div class="stats">LangGraph · local LLM · repair loop · model-provenance audit · eval-scored</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">LangGraph</span><span class="badge">Ollama</span><span class="badge">Streamlit</span><span class="badge">ChromaDB</span>
                 </div>
@@ -774,8 +783,7 @@
     <div class="container">
         <div class="copy">© 2026 Pawan Singh Kapkoti</div>
         <div class="rights">All rights reserved</div>
-        <div class="heart">Built with care, shipped with intent</div>
-        <div class="craft">Crafted with precision · Designed for impact · Engineered to last</div>
+        <div class="heart">Single file. No framework, no tracker, no cloud.</div>
     </div>
 </footer>
 
