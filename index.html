@@ -416,7 +416,7 @@
             </div>
             <div class="gq-chain" id="gqChain"><span class="lbl">audit ledger</span></div>
         </div>
-        <p class="gq-note">Drive it. <b>Ask a metric</b> and the question is compiled to a bounded query, run, and logged. <b>Request PII</b> and the guard refuses it at compile time, before a row is ever read.</p>
+        <p class="gq-note">Drive it. <b>Ask a metric</b> and the question is compiled to a bounded query, run, and logged. <b>Request PII</b> and the guard refuses it at compile time, before a row is ever read. <a href="governance-split.html">See the full ungoverned-vs-governed side-by-side &rarr;</a></p>
 
         <div class="projects-grid">
 
@@ -434,7 +434,7 @@
             <div class="project-card">
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="12" r="2.6"/><circle cx="9" cy="22" r="2.6"/><circle cx="9" cy="32" r="2.6"/><path d="M12 12 L21 22 M12 22 L21 22 M12 32 L21 22"/><rect class="hl" x="22" y="15.5" width="15" height="13" rx="2"/><path class="hl" d="M25 22 h9"/></svg><span class="num">_02</span></div>
                 <h3>sql-steward</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a></div>
+                <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a> &middot; <a href="governance-split.html">Live demo</a></div>
                 <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, declared data-quality checks gate the results, and <code>init --from-db</code> drafts a reviewable layer from a live schema so it scales past a toy database. Same tools across SQL Server, Postgres, and SQLite; query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
                 <div class="stats">semantic layer · no raw SQL · init --from-db · data-quality checks · 3 engines</div>
                 <div class="badges">
