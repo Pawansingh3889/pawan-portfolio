@@ -113,6 +113,11 @@
         .project-card .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
         .badge { padding: 0.3rem 0.75rem; background: var(--accent-soft); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.72rem; color: var(--accent); font-weight: 500; font-family: 'JetBrains Mono', monospace; }
         .live-badge { padding: 0.3rem 0.75rem; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; font-size: 0.72rem; font-weight: 600; box-shadow: 0 0 12px rgba(0, 212, 255, 0.25); }
+        .more { grid-column: 1 / -1; margin-top: 1rem; padding: 1.6rem 1.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+        .more-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; }
+        .more-list { list-style: none; display: grid; gap: 0.7rem; }
+        .more-list li { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+        .more-list a { font-weight: 600; }
 
         /* Stack with icons */
         .stack-group { margin-bottom: 2rem; }
@@ -378,39 +383,6 @@
 
             <div class="project-card">
                 <div class="num">_05</div>
-                <h3>schema-scout</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/schema-scout">Code</a></div>
-                <p>Reverse-engineers a large SQL Server database (150+ tables) into an AI-ready catalog: infers undeclared foreign keys, flags PII, scores how agent-ready the schema is, traces join paths, and renders an offline dashboard. Serves the catalog to an agent over MCP. Runs entirely on-prem.</p>
-                <div class="stats">undeclared FK inference · PII flags · readiness score · MCP server</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">SQL Server</span><span class="badge">MCP</span><span class="badge">pyodbc</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_06</div>
-                <h3>sql-explorer-mcp</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">Code</a> · <a href="https://pypi.org/project/sql-explorer-mcp/">PyPI</a></div>
-                <p>Read-only Model Context Protocol server for SQL Server, Postgres, and SQLite. Lets an LLM introspect and query a database through a three-layer safety stack: connection-level read-only, a sqlglot SELECT-only parser, and a sql-sop lint pass. Multi-server from one config.</p>
-                <div class="stats">3 engines · 3 safety layers · read-only · multi-server</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">FastMCP</span><span class="badge">sqlglot</span><span class="badge">pyodbc</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_07</div>
-                <h3>query-warden</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/query-warden">Code</a></div>
-                <p>Role-based access control for SQL. Define roles in YAML (allowed domains and tables, denied columns); it parses each query with sqlglot, pulls the tables and columns it touches, and blocks anything outside the role before it runs. No database connection, pure function. The access layer the other guards were missing.</p>
-                <div class="stats">YAML policy · sqlglot · deny columns · CLI · read-only</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">sqlglot</span><span class="badge">RBAC</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_08</div>
                 <h3>Manufacturing Compliance Dashboard</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
                 <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
@@ -421,7 +393,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_09</div>
+                <div class="num">_06</div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
                 <p>End-to-end data pipeline. Police UK API to PostgreSQL and BigQuery. 6 dbt marts (outcome analysis, YoY trends), 65 tests. Polars-based alternative ingestion. Declarative validation, SLO monitoring, pipeline maturity scorecard.</p>
@@ -431,59 +403,18 @@
                 </div>
             </div>
 
-            <div class="project-card">
-                <div class="num">_10</div>
-                <h3>sql-sop</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-guard">Code</a> · <a href="https://pypi.org/project/sql-sop/">PyPI</a> · <a href="https://pawansingh3889.github.io/sql-guard/">Playground</a> · <a href="https://github.com/Pawansingh3889/sql-guard/blob/main/ROADMAP.md">Roadmap</a></div>
-                <p>Fast rule-based SQL linter. 39 rules (5 T-SQL specific), 152 tests, libCST-based injection scanner, inline disable directives, <code>.sql-guard.yml</code> config, SARIF output for GitHub Code Scanning. v0.7 milestone in progress (Performance Rules Pack); three external authors merged. <a href="https://pypi.org/project/sql-sop-mcp/">sql-sop-mcp</a> ships the same linter as an MCP server for Claude Desktop / Cursor / ChatGPT. 500+ monthly downloads.</p>
-                <div class="stats">39 rules · 152 tests · libCST scanner · SARIF · v0.6.1 · v0.7 in progress</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">libCST</span><span class="badge">Typer</span><span class="badge">Rich</span><span class="badge">pre-commit</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_11</div>
-                <h3>pr-sop</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/pr-sop">Code</a> · <a href="https://pypi.org/project/pr-sop/">PyPI</a></div>
-                <p>Opinionated PR governance checks. CHANGELOG drift, version consistency between pyproject.toml and __init__.py, stale rev: pins in READMEs. Three config-driven checks turned on via a YAML block. CLI, pre-commit hook, or GitHub Action. First external consumer: sql-sop itself.</p>
-                <div class="stats">3 checks · 29 tests · pydantic v2 · under 1s/PR · v0.1.2</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">Typer</span><span class="badge">Pydantic</span><span class="badge">GitHub Actions</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_12</div>
-                <h3>morning-brief</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/morning-brief">Code</a> · <a href="https://pypi.org/project/morning-brief/">PyPI</a></div>
-                <p>Rule-based daily Gmail triage. Zero LLM, read-only OAuth. Classifies the last day of mail into HIGH / MEDIUM / LOW / SPAM via YAML rules, writes a markdown digest, fires a desktop toast. v0.3.0 adds sub-day windows, thread collapse, and <code>preview</code> / <code>why</code> commands.</p>
-                <div class="stats">Read-only OAuth · sub-day windows · thread collapse · v0.3.0</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">Typer</span><span class="badge">Gmail API</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_13</div>
-                <h3>SQL Ops Reviewer</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">Code</a></div>
-                <p>GitHub Action that auto-reviews .sql files in pull requests using local AI. Catches injection risks, performance anti-patterns, style violations. Posts structured review comments with fix suggestions. One YAML file to set up, runs on the CI runner, zero API keys.</p>
-                <div class="stats">10 categories · phi3:mini default · zero API keys</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">Ollama</span><span class="badge">GitHub Actions</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="num">_14</div>
-                <h3>MediAsk</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/Hackathon-mediask">Code</a> · <a href="https://hackathon-ioqp.onrender.com">Live</a></div>
-                <p>Health Q&A platform for factory workers. NHS-verified guidance, Gemini AI responses, voice input, 18 languages. Flask + PostgreSQL, Dockerised.</p>
-                <div class="stats">NHS-verified · 18 languages · voice input</div>
-                <div class="badges">
-                    <span class="live-badge">Live</span><span class="badge">Flask</span><span class="badge">PostgreSQL</span><span class="badge">Gemini</span>
-                </div>
+            <div class="more">
+                <div class="more-label">More on GitHub &amp; PyPI</div>
+                <ul class="more-list">
+                    <li><a href="https://github.com/Pawansingh3889/sql-sop">sql-sop</a> — rule-based SQL linter: 39 rules, a libCST injection scanner, SARIF output, external contributors (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/schema-scout">schema-scout</a> — reverse-engineers a 150+ table SQL Server database into an AI-ready catalog with FK inference and PII flags</li>
+                    <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/query-warden">query-warden</a> — YAML role-based access control for SQL, enforced before the query runs</li>
+                    <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/morning-brief">morning-brief</a> — rule-based Gmail triage, zero LLM, read-only OAuth (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">SQL Ops Reviewer</a> — GitHub Action that reviews .sql files in PRs with a local model, no API keys</li>
+                    <li><a href="https://hackathon-ioqp.onrender.com">MediAsk</a> — hackathon health Q&amp;A app: NHS-verified guidance, 18 languages, voice input</li>
+                </ul>
             </div>
 
         </div>
@@ -511,25 +442,22 @@
             <h4>Data Engineering</h4>
             <div class="stack-items">
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=getdbt.com&sz=64" alt=""/>dbt</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=prefect.io&sz=64" alt=""/>Prefect</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt=""/>PostgreSQL</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt=""/>SQL Server</span>
+                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=duckdb.org&sz=64" alt=""/>DuckDB</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64" alt=""/>BigQuery</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=pola.rs&sz=64" alt=""/>Polars</span>
-                <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt=""/>pandas</span>
-                <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachespark/apachespark-original.svg" alt=""/>PySpark</span>
             </div>
         </div>
 
         <div class="stack-group">
-            <h4>AI / RAG</h4>
+            <h4>AI &amp; Agents</h4>
             <div class="stack-items">
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=langchain.com&sz=64" alt=""/>LangGraph</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=modelcontextprotocol.io&sz=64" alt=""/>FastMCP</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=ollama.ai&sz=64" alt=""/>Ollama</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=trychroma.com&sz=64" alt=""/>ChromaDB</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt=""/>pgvector</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=ai.google.dev&sz=64" alt=""/>Gemini</span>
+                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=trychroma.com&sz=64" alt=""/>ChromaDB</span>
             </div>
         </div>
 
@@ -537,10 +465,8 @@
             <h4>Web & API</h4>
             <div class="stack-items">
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt=""/>FastAPI</span>
-                <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" alt=""/>Flask</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=streamlit.io&sz=64" alt=""/>Streamlit</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt=""/>Next.js</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=pydantic.dev&sz=64" alt=""/>Pydantic</span>
             </div>
         </div>
 
@@ -549,8 +475,6 @@
             <div class="stack-items">
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=powerbi.microsoft.com&sz=64" alt=""/>Power BI</span>
                 <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=lookerstudio.google.com&sz=64" alt=""/>Looker Studio</span>
-                <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt=""/>Jupyter</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=plotly.com&sz=64" alt=""/>Plotly</span>
             </div>
         </div>
 
@@ -558,10 +482,8 @@
             <h4>Infra & DevOps</h4>
             <div class="stack-items">
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt=""/>Docker</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=opentofu.org&sz=64" alt=""/>OpenTofu</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg" alt=""/>GitHub Actions</span>
                 <span class="stack-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt=""/>Linux</span>
-                <span class="stack-item"><img src="https://www.google.com/s2/favicons?domain=cloud.google.com&sz=64" alt=""/>Google Cloud</span>
             </div>
         </div>
 
