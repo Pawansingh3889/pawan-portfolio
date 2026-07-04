@@ -23,7 +23,7 @@
             --dim: #6b7494;
             --accent: #00d4ff;
             --accent-soft: rgba(0, 212, 255, 0.12);
-            --accent-glow: 0 0 20px rgba(0, 212, 255, 0.25);
+            --accent-glow: 0 8px 24px rgba(0, 0, 0, 0.35);
             --link: #00d4ff;
         }
         html { scroll-behavior: smooth; }
@@ -60,11 +60,10 @@
         .hero { padding: 6rem 0 4rem; }
         .hero .tag { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; margin-bottom: 1.4rem; letter-spacing: 0.22em; text-transform: uppercase; }
         .hero .greeting { font-size: 1.4rem; font-weight: 400; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: -0.01em; }
-        .hero h1.bigname { font-size: 5.5rem; font-weight: 900; line-height: 1; letter-spacing: -0.05em; margin-bottom: 0.4rem; background: linear-gradient(135deg, #00d4ff 0%, #5ce0ff 50%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero h1.bigname { font-size: 5rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin-bottom: 0.4rem; color: var(--text); }
         .hero .fullname { font-size: 1rem; color: var(--dim); margin-bottom: 1.6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
         .hero .role { font-size: 1.6rem; font-weight: 600; color: var(--text); margin-bottom: 1.2rem; }
-        .hero .role .pipe { color: var(--accent); animation: blink 1.1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+        .hero .role .pipe { color: var(--accent); }
         .hero p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 1.6rem; }
         .proof { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
         .proof span { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.35rem 0.85rem; background: var(--surface); }
@@ -174,52 +173,10 @@
             .hero .role { font-size: 1.2rem; }
         }
 
-        /* Animated background layers */
-        .bg-mouse { position: fixed; inset: 0; pointer-events: none; z-index: 0;
-            background:
-                radial-gradient(circle at calc(var(--mx, 50%) ) calc(var(--my, 50%)), rgba(0, 212, 255, 0.18) 0%, transparent 45%),
-                radial-gradient(circle at 20% 80%, rgba(120, 80, 255, 0.10) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.10) 0%, transparent 50%),
-                radial-gradient(circle at 60% 90%, rgba(0, 180, 220, 0.08) 0%, transparent 50%);
-            animation: pulse 6s ease-in-out infinite;
-        }
-        .particle-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-        .particle { position: absolute; box-shadow: 0 0 20px rgba(0, 212, 255, 0.18); }
-        .particle-emoji { position: absolute; opacity: 0.32; filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.4)); }
-        .particle-geo { position: absolute; }
-        .layout, footer { position: relative; z-index: 2; }
-        .sidebar { z-index: 3; }
-
-        /* Keyframes (lifted from Dhinesh's index.js) */
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.85; } }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-30px) translateX(15px) rotate(90deg); }
-            50% { transform: translateY(0) translateX(-10px) rotate(180deg); }
-            75% { transform: translateY(15px) translateX(-15px) rotate(270deg); }
-        }
-        @keyframes float-soft {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.32; }
-            50% { transform: translateY(-20px) translateX(10px); opacity: 0.5; }
-        }
-        @keyframes fadeInUp { 0% { transform: translateY(40px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-
-        /* Scroll reveal */
-        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .reveal.in { opacity: 1; transform: translateY(0); }
-
-        /* Reduce motion */
-        @media (prefers-reduced-motion: reduce) {
-            .particle, .particle-emoji, .particle-geo { animation: none !important; opacity: 0.15 !important; }
-            .bg-mouse { animation: none !important; }
-            .reveal { transition: none; opacity: 1; transform: none; }
-        }
+        /* Static page: no scroll animation. Content is always visible. */
     </style>
 </head>
 <body>
-
-<div class="bg-mouse" aria-hidden="true"></div>
-<div class="particle-layer" aria-hidden="true" id="particles"></div>
 
 <div class="layout">
 
@@ -789,96 +746,6 @@
 
 </main>
 </div>
-
-<script>
-(function () {
-    const layer = document.getElementById('particles');
-    if (!layer) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
-
-    const rand = (min, max) => Math.random() * (max - min) + min;
-    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-
-    const gradients = [
-        'linear-gradient(45deg, #00d4ff, #0095c8)',
-        'linear-gradient(45deg, #5ce0ff, #00d4ff)',
-        'linear-gradient(45deg, #7c5cff, #4b3aff)',
-        'linear-gradient(45deg, #00b8a9, #00d4ff)',
-        'linear-gradient(45deg, #ffffff, #5ce0ff)'
-    ];
-    const emojis = ['🐍', '🐘', '⚡', '☁️', '🐳', '🛡️', '🧪', '📊', '⚙️', '🤖', '🧠', '📈', '🔧', '💡', '🚀', '🎯', '🔍', '📦', '🪝', '🧬'];
-
-    const frag = document.createDocumentFragment();
-
-    for (let i = 0; i < 32; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle';
-        const w = rand(3, 9);
-        d.style.width = `${w}px`;
-        d.style.height = `${w}px`;
-        d.style.background = pick(gradients);
-        d.style.borderRadius = Math.random() > 0.45 ? '50%' : '20%';
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float ${rand(18, 32)}s ease-in-out infinite ${rand(0, 12)}s`;
-        d.style.transform = `rotate(${rand(0, 360)}deg)`;
-        frag.appendChild(d);
-    }
-
-    for (let i = 0; i < 22; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle-emoji';
-        d.textContent = pick(emojis);
-        d.style.fontSize = `${rand(14, 28)}px`;
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float-soft ${rand(22, 38)}s ease-in-out infinite ${rand(0, 14)}s`;
-        frag.appendChild(d);
-    }
-
-    for (let i = 0; i < 12; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle-geo';
-        const w = rand(18, 42);
-        d.style.width = `${w}px`;
-        d.style.height = `${w}px`;
-        d.style.border = `2px solid rgba(0, 212, 255, ${rand(0.18, 0.38).toFixed(2)})`;
-        d.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float ${rand(28, 48)}s ease-in-out infinite ${rand(0, 12)}s`;
-        d.style.transform = `rotate(${rand(0, 360)}deg)`;
-        frag.appendChild(d);
-    }
-
-    layer.appendChild(frag);
-
-    let raf = null, mx = 0, my = 0;
-    window.addEventListener('mousemove', (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-            document.documentElement.style.setProperty('--mx', `${mx}px`);
-            document.documentElement.style.setProperty('--my', `${my}px`);
-            raf = null;
-        });
-    }, { passive: true });
-
-    const sections = document.querySelectorAll('.section, .hero');
-    sections.forEach(s => s.classList.add('reveal'));
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in');
-                io.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    sections.forEach(s => io.observe(s));
-})();
-</script>
 
 </body>
 </html>
