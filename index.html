@@ -25,6 +25,8 @@
             --accent-soft: rgba(0, 212, 255, 0.12);
             --accent-glow: 0 8px 24px rgba(0, 0, 0, 0.35);
             --link: #00d4ff;
+            --refuse: #ff6b61;
+            --refuse-soft: rgba(255, 107, 97, 0.13);
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); min-height: 100vh; }
@@ -179,6 +181,66 @@
         }
 
         /* Static page: no scroll animation. Content is always visible. */
+        /* ---- interactive governed pipeline (ported from the concept) ---- */
+        .gq { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--surface); overflow: hidden; margin-bottom: 1.4rem; }
+        .gq-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .gq-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--dim); display: flex; align-items: center; gap: 0.5rem; }
+        .gq-title .dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 1px solid var(--border-strong); }
+        .gq-controls { display: flex; gap: 0.4rem; }
+        .gqbtn { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--text); background: var(--bg-deep); border: 1px solid var(--border-strong); border-radius: 6px; padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.15s; }
+        .gqbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(0,212,255,0.3); }
+        .gqbtn.pii:hover:not(:disabled) { border-color: var(--refuse); color: var(--refuse); box-shadow: none; }
+        .gqbtn:disabled { opacity: 0.4; cursor: default; }
+        .gqbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .gq-flow { position: relative; padding: 0.5rem 1rem 0.6rem; }
+        .rail { position: absolute; left: calc(2.5rem - 1px); top: 1.6rem; bottom: 1.3rem; width: 2px; background: var(--border-strong); }
+        .packet { position: absolute; left: calc(2.5rem - 6px); top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px var(--accent); transform: translateY(0); transition: transform 0.6s cubic-bezier(0.4,0.1,0.2,1), opacity 0.3s, background 0.2s, box-shadow 0.2s; z-index: 3; }
+        .packet.bad { background: var(--refuse); box-shadow: 0 0 12px var(--refuse); }
+        .stage { position: relative; display: grid; grid-template-columns: 3rem 5rem 1fr auto; align-items: center; gap: 0.3rem 0.9rem; padding: 0.5rem 0; min-height: 2.6rem; }
+        .stage .marker { justify-self: center; width: 11px; height: 11px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border-strong); z-index: 2; transition: all 0.25s; }
+        .stage .sname { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.04em; color: var(--dim); transition: color 0.25s; }
+        .stage .detail { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text); opacity: 0; transform: translateX(-4px); transition: opacity 0.35s, transform 0.35s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .stage .schip { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.03em; padding: 0.08rem 0.5rem; border-radius: 4px; border: 1px solid transparent; opacity: 0; transition: opacity 0.3s; white-space: nowrap; justify-self: end; }
+        .stage.on .marker { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+        .stage.on .sname { color: var(--text); }
+        .stage.on .detail { opacity: 1; transform: none; }
+        .stage.on .schip { opacity: 1; color: var(--accent); border-color: var(--border-strong); background: var(--accent-soft); }
+        .stage.refuse .marker { border-color: var(--refuse); background: var(--refuse); box-shadow: 0 0 10px var(--refuse); }
+        .stage.refuse .detail { opacity: 1; transform: none; color: var(--refuse); }
+        .stage.refuse .schip { opacity: 1; color: var(--refuse); border-color: var(--refuse); background: var(--refuse-soft); }
+        .stage.skip .sname, .stage.skip .detail { opacity: 0.3; transform: none; }
+        .gq-chain { display: flex; align-items: center; gap: 0; padding: 0.6rem 1rem 0.75rem; border-top: 1px solid var(--border); flex-wrap: wrap; min-height: 2.7rem; }
+        .gq-chain .lbl { font-family: 'JetBrains Mono', monospace; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-right: 0.8rem; }
+        .blk { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; border: 1px solid var(--border-strong); background: var(--accent-soft); color: var(--accent); border-radius: 5px; padding: 0.22rem 0.55rem; display: inline-flex; gap: 0.45rem; opacity: 0; transform: translateY(4px); transition: opacity 0.35s, transform 0.35s; position: relative; }
+        .blk + .blk { margin-left: 0.9rem; }
+        .blk + .blk::before { content: "\2192"; position: absolute; left: -0.74rem; color: var(--dim); }
+        .blk.in { opacity: 1; transform: none; }
+        .blk .bi { color: var(--dim); }
+        .gq-note { font-size: 0.9rem; color: var(--muted); margin: 0 0 2rem; max-width: 640px; }
+        .gq-note b { color: var(--text); font-weight: 600; }
+        /* project glyphs */
+        .pcard-top { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.5rem; }
+        .pcard-top .num { margin-bottom: 0 !important; }
+        .pglyph { width: 34px; height: 34px; color: var(--dim); flex-shrink: 0; transition: color 0.2s; }
+        .pglyph .hl { color: var(--accent); }
+        .project-card:hover .pglyph { color: var(--accent); }
+        /* inline tamper-evident chain (agent-blackbox) */
+        .chainmini { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; margin: 0.2rem 0 0.7rem; }
+        .chainmini .cblk { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; border: 1px solid var(--border-strong); background: var(--accent-soft); color: var(--accent); border-radius: 5px; padding: 0.24rem 0.55rem; position: relative; cursor: default; transition: all 0.18s; }
+        .chainmini .cblk + .cblk::before { content: "\2192"; position: absolute; left: -0.72rem; color: var(--dim); }
+        .chainmini .cblk:hover, .chainmini .cblk:focus, .chainmini .cblk:hover ~ .cblk, .chainmini .cblk:focus ~ .cblk { color: var(--refuse); border-color: var(--refuse); background: var(--refuse-soft); }
+        .chainmini .broke { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--refuse); opacity: 0; transition: opacity 0.18s; }
+        .chainmini .cblk:hover ~ .broke, .chainmini .cblk:focus ~ .broke { opacity: 1; }
+        .chainmini-hint { font-size: 0.8rem; color: var(--dim); margin-bottom: 0.8rem; }
+        @media (prefers-reduced-motion: reduce) {
+            .packet, .stage .marker, .stage .detail, .stage .schip, .blk, .pglyph { transition: none !important; }
+        }
+        @media (max-width: 620px) {
+            .stage { grid-template-columns: 2.6rem 4.2rem 1fr auto; gap: 0.2rem 0.5rem; }
+            .stage .detail { font-size: 0.72rem; }
+            .rail { left: calc(2.2rem - 1px); }
+            .packet { left: calc(2.2rem - 6px); }
+        }
     </style>
 </head>
 <body>
@@ -335,10 +397,31 @@
         <h2>Projects</h2>
         <p class="subtitle">Things I built that are running in production or deployed publicly.</p>
 
+        <div class="gq">
+            <div class="gq-top">
+                <span class="gq-title"><span class="dot"></span> sql-steward &#183; governed execution</span>
+                <span class="gq-controls">
+                    <button class="gqbtn" id="btnAsk" type="button">&#9656; ask a metric</button>
+                    <button class="gqbtn pii" id="btnPii" type="button">&#9656; request PII</button>
+                </span>
+            </div>
+            <div class="gq-flow" id="gqFlow" aria-label="Interactive diagram of a query passing through the governance layer.">
+                <div class="rail" aria-hidden="true"></div>
+                <div class="packet" id="packet" aria-hidden="true"></div>
+                <div class="stage" data-stage="ask"><span class="marker" aria-hidden="true"></span><span class="sname">ask</span><span class="detail" id="d-ask">"&#8230;"</span><span class="schip"></span></div>
+                <div class="stage" data-stage="compile"><span class="marker" aria-hidden="true"></span><span class="sname">compile</span><span class="detail">semantic layer &#8594; SELECT</span><span class="schip">ok</span></div>
+                <div class="stage" data-stage="guard"><span class="marker" aria-hidden="true"></span><span class="sname">guard</span><span class="detail" id="d-guard">policy check</span><span class="schip" id="s-guard">ok</span></div>
+                <div class="stage" data-stage="execute"><span class="marker" aria-hidden="true"></span><span class="sname">execute</span><span class="detail">3 rows</span><span class="schip">ok</span></div>
+                <div class="stage" data-stage="audit"><span class="marker" aria-hidden="true"></span><span class="sname">audit</span><span class="detail">append to ledger</span><span class="schip">chain &#10003;</span></div>
+            </div>
+            <div class="gq-chain" id="gqChain"><span class="lbl">audit ledger</span></div>
+        </div>
+        <p class="gq-note">Drive it. <b>Ask a metric</b> and the question is compiled to a bounded query, run, and logged. <b>Request PII</b> and the guard refuses it at compile time, before a row is ever read.</p>
+
         <div class="projects-grid">
 
             <div class="project-card">
-                <div class="num">_01</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="9" width="28" height="6" rx="1.5"/><rect x="8" y="19" width="28" height="6" rx="1.5"/><rect x="8" y="29" width="28" height="6" rx="1.5" class="hl"/></svg><span class="num">_01</span></div>
                 <h3>Governed Agent Stack</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/governed-agent-stack">Code</a></div>
                 <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Small tools compose into one governed plane: schema-scout maps the data, sql-steward compiles every query from a semantic layer, query-warden and pii-veil fence in role-checked access, and agent-blackbox keeps a tamper-evident record. The governance is the point, not another gateway: every call is authenticated, policy-checked, budgeted, and logged, and nothing leaves the building.</p>
@@ -349,7 +432,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_02</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="12" r="2.6"/><circle cx="9" cy="22" r="2.6"/><circle cx="9" cy="32" r="2.6"/><path d="M12 12 L21 22 M12 22 L21 22 M12 32 L21 22"/><rect class="hl" x="22" y="15.5" width="15" height="13" rx="2"/><path class="hl" d="M25 22 h9"/></svg><span class="num">_02</span></div>
                 <h3>sql-steward</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a></div>
                 <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, declared data-quality checks gate the results, and <code>init --from-db</code> drafts a reviewable layer from a live schema so it scales past a toy database. Same tools across SQL Server, Postgres, and SQLite; query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
@@ -360,7 +443,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_03</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M34 22 a12 12 0 1 1-3.5-8.5"/><path class="hl" d="M31 8.5 l0 6 -6 0"/></svg><span class="num">_03</span></div>
                 <h3>FloorMind</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/FloorMind">Code</a> · <a href="https://pawansingh3889.github.io/FloorMind/">Docs</a></div>
                 <p>On-prem natural-language-to-SQL over manufacturing data. A LangGraph agent turns plain English into a schema-validated query and answer in seconds, served by a local LLM via Ollama. One governed path: a validation gate, a self-correcting repair loop that feeds errors back to the model, and a tamper-evident agent-blackbox ledger that records the model and prompt behind every answer. Eval score tracked per release, not vibes.</p>
@@ -371,10 +454,17 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_04</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="16" width="12" height="12" rx="2"/><rect x="26" y="16" width="12" height="12" rx="2" class="hl"/><path d="M18 22 h8"/></svg><span class="num">_04</span></div>
                 <h3>agent-blackbox</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/agent-blackbox">Code</a></div>
                 <p>An append-only, hash-chained ledger that gives AI agent actions a tamper-evident audit trail. Each row stores the hash of the row before it, so any edit after the fact breaks the chain and <code>verify()</code> points at it. Optional HMAC keying. On-prem, zero dependencies, a single SQLite file.</p>
+                <div class="chainmini" aria-label="Hovering a block breaks the hash chain from that point on.">
+                    <span class="cblk" tabindex="0">#01 3f9c&#8230;</span>
+                    <span class="cblk" tabindex="0">#02 a71e&#8230;</span>
+                    <span class="cblk" tabindex="0">#03 0b4d&#8230;</span>
+                    <span class="broke">chain broken &#10007;</span>
+                </div>
+                <div class="chainmini-hint">Hover a block to edit it, and every block after it breaks.</div>
                 <div class="stats">hash-chained · tamper-evident · HMAC option · zero deps</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">SQLite</span><span class="badge">SHA-256</span>
@@ -382,7 +472,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_05</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 30 a13 13 0 0 1 26 0"/><path class="hl" d="M22 30 L30 21"/><circle cx="22" cy="30" r="1.6" fill="currentColor" stroke="none"/></svg><span class="num">_05</span></div>
                 <h3>Manufacturing Compliance Dashboard</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
                 <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
@@ -393,7 +483,7 @@
             </div>
 
             <div class="project-card">
-                <div class="num">_06</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="11" cy="12" rx="5" ry="2.2"/><path d="M6 12 v8 a5 2.2 0 0 0 10 0 v-8"/><path d="M18 22 h6"/><rect x="25" y="10" width="6" height="6" rx="1" class="hl"/><rect x="25" y="19" width="6" height="6" rx="1" class="hl"/><rect x="34" y="14.5" width="6" height="6" rx="1" class="hl"/></svg><span class="num">_06</span></div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
                 <p>End-to-end data pipeline. Police UK API to PostgreSQL and BigQuery. 6 dbt marts (outcome analysis, YoY trends), 65 tests. Polars-based alternative ingestion. Declarative validation, SLO monitoring, pipeline maturity scorecard.</p>
@@ -668,6 +758,63 @@
 
 </main>
 </div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var flow = document.getElementById('gqFlow');
+  if (!flow) return;
+  var packet = document.getElementById('packet');
+  var stages = Array.prototype.slice.call(flow.querySelectorAll('.stage'));
+  var byName = {}; stages.forEach(function (s) { byName[s.getAttribute('data-stage')] = s; });
+  var chainWrap = document.getElementById('gqChain');
+  var btnAsk = document.getElementById('btnAsk');
+  var btnPii = document.getElementById('btnPii');
+  var dAsk = document.getElementById('d-ask');
+  var dGuard = document.getElementById('d-guard');
+  var sGuard = document.getElementById('s-guard');
+  var running = false, chainN = 0, played = false;
+  var QUESTIONS = ['which product margins were hit hardest by discounts?', 'total waste cost by line last week?', 'capital tied up in stock, by product?'];
+  var qi = 0;
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, reduce ? 0 : ms); }); }
+  function markerY(st) { var m = st.querySelector('.marker'); return m.offsetTop + m.offsetHeight / 2 - packet.offsetHeight / 2; }
+  function clearAll() { stages.forEach(function (s) { s.classList.remove('on', 'skip', 'refuse'); }); packet.classList.remove('bad'); packet.style.opacity = '1'; sGuard.textContent = 'ok'; dGuard.textContent = 'policy check'; }
+  function setBtns(on) { btnAsk.disabled = !on; btnPii.disabled = !on; }
+  function moveTo(st) { packet.style.transform = 'translateY(' + markerY(st) + 'px)'; return sleep(640); }
+  function hexFrom(seed) { var h = 2166136261; var s = 'blk' + seed; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = (h * 16777619) >>> 0; } return h.toString(16).padStart(8, '0').slice(0, 6); }
+  function addBlock() { chainN++; var b = document.createElement('span'); b.className = 'blk'; b.innerHTML = '<span class="bi">#' + String(chainN).padStart(2, '0') + '</span> sha256 ' + hexFrom(chainN + '' + Math.floor(performance.now())) + '…'; chainWrap.appendChild(b); requestAnimationFrame(function () { b.classList.add('in'); }); while (chainWrap.querySelectorAll('.blk').length > 3) { chainWrap.removeChild(chainWrap.querySelector('.blk')); } }
+  function run(type) {
+    if (running) return Promise.resolve();
+    running = true; setBtns(false); clearAll();
+    if (type === 'pii') { dAsk.textContent = 'get_records(customers, [email])'; } else { dAsk.textContent = '"' + QUESTIONS[qi % QUESTIONS.length] + '"'; qi++; }
+    packet.style.transition = 'none'; packet.style.transform = 'translateY(' + markerY(byName.ask) + 'px)'; void packet.offsetWidth; packet.style.transition = '';
+    return Promise.resolve()
+      .then(function () { byName.ask.classList.add('on'); return sleep(480); })
+      .then(function () { return moveTo(byName.compile); })
+      .then(function () { byName.compile.classList.add('on'); return sleep(460); })
+      .then(function () { return moveTo(byName.guard); })
+      .then(function () {
+        if (type === 'pii') {
+          dGuard.textContent = 'pii:EMAIL_ADDRESS'; sGuard.textContent = 'refused';
+          byName.guard.classList.add('refuse'); packet.classList.add('bad');
+          return sleep(820).then(function () { byName.execute.classList.add('skip'); byName.audit.classList.add('skip'); packet.style.opacity = '0'; return sleep(500); });
+        }
+        byName.guard.classList.add('on');
+        return sleep(430).then(function () { return moveTo(byName.execute); }).then(function () { byName.execute.classList.add('on'); return sleep(430); }).then(function () { return moveTo(byName.audit); }).then(function () { byName.audit.classList.add('on'); addBlock(); return sleep(520); });
+      })
+      .then(function () { setBtns(true); running = false; });
+  }
+  btnAsk.addEventListener('click', function () { run('allow'); });
+  btnPii.addEventListener('click', function () { run('pii'); });
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting && !played) { played = true; io.disconnect(); run('allow').then(function () { return sleep(700); }).then(function () { return run('pii'); }); } }); }, { threshold: 0.4 });
+    io.observe(flow);
+  } else {
+    ['ask', 'compile', 'guard', 'execute', 'audit'].forEach(function (k) { byName[k].classList.add('on'); });
+    dAsk.textContent = '"which product margins were hit hardest by discounts?"'; addBlock();
+  }
+})();
+</script>
 
 </body>
 </html>
