@@ -153,6 +153,16 @@
         .pr-card h4 a:hover { color: var(--accent); }
         .pr-card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; }
         .pr-card p { font-size: 0.87rem; color: var(--muted); }
+        .pr-card .meta .st { color: var(--accent); }
+        .pr-card .meta .st.rev { color: #e0a33a; }
+        .pr-review { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
+        .pr-review .lbl { font-family: 'JetBrains Mono', monospace; color: #e0a33a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1rem; }
+        .pr-review ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2.2rem; }
+        .pr-review li { font-size: 0.86rem; color: var(--muted); line-height: 1.5; padding-left: 1.1rem; position: relative; }
+        .pr-review li::before { content: '▹'; color: #e0a33a; position: absolute; left: 0; }
+        .pr-review li a { color: var(--text); font-weight: 500; }
+        .pr-review li a:hover { color: var(--accent); }
+        @media (max-width: 820px) { .pr-review ul { grid-template-columns: 1fr; } }
 
         /* Activity */
         .activity-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
@@ -715,39 +725,51 @@
     <div class="container">
         <div class="section-num">// 07 NOTABLE PRS</div>
         <h2>Signature Upstream Pull Requests</h2>
-        <p class="subtitle">Contributions to projects I use every day.</p>
+        <p class="subtitle">Merged fixes and features in the SQL, data and AI tools I use every day.</p>
 
         <div class="prs-grid">
             <div class="pr-card"><div class="num">01</div><div>
-                <h4><a href="https://github.com/scanapi/scanapi/pull/868">scanapi/scanapi#868</a></h4>
-                <div class="meta">docs: add missing docstrings to spec_evaluator.py · First Contribution</div>
-                <p>Comprehensive docstrings across the SpecEvaluator class, instance methods, and module-level singledispatch functions. Closed issue #442 (open since 2021).</p>
+                <h4><a href="https://github.com/tobymao/sqlglot/pull/7824">tobymao/sqlglot#7824</a></h4>
+                <div class="meta">Fix(presto): preserve SHA256/SHA512 digest semantics · <span class="st">merged</span></div>
+                <p>Presto/Trino mapped native SHA256/512 to the string-hash expression, silently changing hash values in transpilation. Traced the root cause into the transpiler that underpins dbt and SQLMesh, mirrored the existing MD5 handling, and it merged the next morning.</p>
             </div></div>
             <div class="pr-card"><div class="num">02</div><div>
-                <h4><a href="https://github.com/pyOpenSci/python-package-guide/pull/622">pyOpenSci/python-package-guide#622</a></h4>
-                <div class="meta">docs: CITATION.cff and software-citation guidance</div>
-                <p>Added Turing Way links and clearer guidance on writing <code>CITATION.cff</code> files for scientific Python packages.</p>
+                <h4><a href="https://github.com/apache/superset/pull/39118">apache/superset#39118</a></h4>
+                <div class="meta">refactor(dashboard): download-permission rename · <span class="st">merged</span></div>
+                <p>Aligned the dashboard download permission with the explore path. Refined to a single-responsibility change after maintainer review, then merged into Apache Superset.</p>
             </div></div>
             <div class="pr-card"><div class="num">03</div><div>
-                <h4><a href="https://github.com/dlt-hub/dlt/pull/3830">dlt-hub/dlt#3830</a></h4>
-                <div class="meta">docs: source count correction in intro</div>
-                <p>Updated the source count from 5,000 to 8,000+ in the intro docs to match current reality.</p>
+                <h4><a href="https://github.com/sqlfluff/sqlfluff/pull/8088">sqlfluff/sqlfluff#8088</a></h4>
+                <div class="meta">TSQL: restore single-quote normalization · <span class="st">merged</span></div>
+                <p>A reported linter false-positive on quoted T-SQL aliases turned out to be a dialect-level bug: the patched <code>single_quote</code> lexer had dropped normalization for every single-quoted token. Fixed at the root with a regression test; all 545 dialect fixtures pass unregenerated.</p>
             </div></div>
             <div class="pr-card"><div class="num">04</div><div>
-                <h4><a href="https://github.com/py-pdf/fpdf2/pull/1805">py-pdf/fpdf2#1805</a></h4>
-                <div class="meta">i18n: Punjabi (pa) tutorial translation</div>
-                <p>Translated the fpdf2 tutorial into Punjabi to widen the reach of the documentation in South-Asian developer communities.</p>
+                <h4><a href="https://github.com/drt-hub/drt/pull/668">drt-hub/drt#668</a> <span style="color:var(--muted);font-size:0.85rem;">(+ #608, #678)</span></h4>
+                <div class="meta">feat: sync.mask PII masking · Mixpanel destination · <span class="st">merged</span></div>
+                <p>Collaborator across releases. Shipped <code>sync.mask</code> (hash / redact / truncate PII before load) as a pure transform at the field-mapping seam, plus the Mixpanel destination connector and the official connector tutorial.</p>
             </div></div>
             <div class="pr-card"><div class="num">05</div><div>
-                <h4><a href="https://github.com/pandas-dev/pandas/pull/65002">pandas-dev/pandas#65002</a></h4>
-                <div class="meta">docs: clarified str.cat() return type for Index · closed</div>
-                <p>Documentation clarification on the return-type behaviour of <code>str.cat()</code> when called on an Index versus a Series.</p>
+                <h4><a href="https://github.com/tobymao/sqlglot/pull/7832">tobymao/sqlglot#7832</a></h4>
+                <div class="meta">Fix(bigquery): SHA512 → SHA2Digest · <span class="st">merged</span></div>
+                <p>Follow-up to #7824, opened at the maintainer's invitation: mapped BigQuery's native SHA512 to the digest expression and gave Presto/Trino a type-aware encode, keeping byte-for-byte hash semantics across six dialects.</p>
             </div></div>
             <div class="pr-card"><div class="num">06</div><div>
-                <h4><a href="https://github.com/chroma-core/chroma/pull/6819">chroma-core/chroma#6819</a></h4>
-                <div class="meta">docs: HNSW index tuning guide · open, in review</div>
-                <p>Added a 220-line HNSW parameter tuning guide and a runtime version-compatibility check between client and server.</p>
+                <h4><a href="https://github.com/openfoodfacts/openfoodfacts-server/pull/13892">openfoodfacts/openfoodfacts-server#13892</a></h4>
+                <div class="meta">taxonomy: add "groundnut" to peanut allergens · <span class="st">merged</span></div>
+                <p>A one-line fix to a safety-critical open dataset used worldwide: "groundnut", the standard UK and Indian term, was missing from the peanut allergen synonyms, so allergen cross-checks could silently miss it.</p>
             </div></div>
+        </div>
+
+        <div class="pr-review">
+            <div class="lbl">// Open, in review — six more opened this month</div>
+            <ul>
+                <li><a href="https://github.com/ONSdigital/rdsa-utils/pull/245">ONS · rdsa-utils#245</a> — human-readable pipeline run-ID generator, validator and parser</li>
+                <li><a href="https://github.com/nhsengland/nhse-rap-cookiecutter/pull/78">NHS England · #78</a> — cross-platform command detection, fixing setup on Windows</li>
+                <li><a href="https://github.com/co-cddo/gds-idea-box2.0/pull/98">GOV.UK / CDDO · #98</a> — SharePoint list pagination bug silently truncating past 200 rows</li>
+                <li><a href="https://github.com/duckdb/duckdb-web/pull/7002">DuckDB · duckdb-web#7002</a> — documented the full set of MySQL-extension settings</li>
+                <li><a href="https://github.com/SQLMesh/sqlmesh/pull/5888">SQLMesh · #5888</a> — hex-string surrogate keys for SHA256/512 on Presto/Trino</li>
+                <li><a href="https://github.com/apache/superset/pull/41799">Apache Superset · #41799</a> — GranularExportControls download-permission follow-up</li>
+            </ul>
         </div>
     </div>
 </section>
