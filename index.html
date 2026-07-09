@@ -159,6 +159,15 @@
         .comp-card .role { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
             color: var(--dim); font-weight: 700; }
         .comp-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+        /* ---- adoption / traction band ---- */
+        .traction { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin: 0 0 2rem; }
+        @media (min-width: 720px) { .traction { grid-template-columns: repeat(3, 1fr); } }
+        .tstat { padding: 1.35rem 1.4rem; background: var(--surface); border: 1px solid var(--border-strong);
+            border-radius: 12px; transition: border-color 0.2s, box-shadow 0.2s; }
+        .tstat:hover { border-color: var(--accent); box-shadow: var(--accent-glow); }
+        .tnum { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .tlbl { font-size: 0.83rem; color: var(--muted); margin-top: 0.55rem; line-height: 1.55; }
+        .tlbl b { color: var(--text); font-weight: 600; }
 
         /* Stack with icons */
         .stack-group { margin-bottom: 2rem; }
@@ -378,7 +387,7 @@
         <h1 class="bigname">PAWAN</h1>
         <div class="fullname">~/import pawan_singh_kapkoti</div>
         <div class="role">Data Engineer<span class="pipe">|</span></div>
-        <p class="lead">I build the data platform and the governance layer that makes it safe to point an AI agent at a real database: on-prem pipelines, a semantic layer that compiles every query, and a tamper-evident record of what the agent did. Yorkshire-based, shipping tools on the side. Compliance shouldn't mean spreadsheets, and AI shouldn't require the cloud.</p>
+        <p class="lead">I build the data platform and the governance layer that makes it safe to point an AI agent at a real database: on-prem pipelines, a semantic layer that compiles every query, and a tamper-evident record of what the agent did. It's open source, and other people use it. Thousands of installs, and outside developers merging rules into the code. Yorkshire-based. Compliance shouldn't mean spreadsheets, and AI shouldn't require the cloud.</p>
         <div class="proof">
             <span>On-prem, <b>no cloud, no API keys</b></span>
             <span>Semantic-layer <b>governed SQL</b></span>
@@ -495,7 +504,22 @@
     <div class="container">
         <div class="section-num">// 04 PROJECTS</div>
         <h2>Projects</h2>
-        <p class="subtitle">Things I built that are running in production or deployed publicly.</p>
+        <p class="subtitle">What I've shipped, and the adoption it has picked up.</p>
+
+        <div class="traction">
+            <div class="tstat">
+                <div class="tnum">6,000+</div>
+                <div class="tlbl">downloads of <a href="https://github.com/Pawansingh3889/sql-guard"><b>sql-sop</b></a> on PyPI, my rule-based SQL linter, and 500+ every month.</div>
+            </div>
+            <div class="tstat">
+                <div class="tnum">5</div>
+                <div class="tlbl"><b>outside developers</b> have <a href="https://github.com/Pawansingh3889/sql-guard/pulls?q=is%3Apr+is%3Amerged+-author%3APawansingh3889">merged 11 lint rules</a> into it, six from one contributor.</div>
+            </div>
+            <div class="tstat">
+                <div class="tnum">MCP</div>
+                <div class="tlbl"><a href="https://github.com/Pawansingh3889/sql-steward"><b>sql-steward</b></a> accepted into the official Model Context Protocol registry.</div>
+            </div>
+        </div>
 
         <div class="gq">
             <div class="gq-top">
@@ -598,7 +622,7 @@
             <div class="more">
                 <div class="more-label">More on GitHub &amp; PyPI</div>
                 <ul class="more-list">
-                    <li><a href="https://github.com/Pawansingh3889/sql-sop">sql-sop</a> — rule-based SQL linter: 39 rules, a libCST injection scanner, SARIF output, external contributors (PyPI)</li>                    <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>                    <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>                    <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/morning-brief">morning-brief</a> — rule-based Gmail triage, zero LLM, read-only OAuth (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">SQL Ops Reviewer</a> — GitHub Action that reviews .sql files in PRs with a local model, no API keys</li>
                     <li><a href="https://hackathon-ioqp.onrender.com">MediAsk</a> — hackathon health Q&amp;A app: NHS-verified guidance, 18 languages, voice input</li>
@@ -714,7 +738,7 @@
                         <h3>sql-sop</h3>
                     </div>
                     <div class="meta">Maintainer — review queue, releases, contributor funnel</div>
-                    <p>Review and merge community PRs across the rule catalogue. Recent merges: <a href="https://github.com/Pawansingh3889/sql-guard/pull/21">W013 window-without-partition</a> (Prabhu-1409), <a href="https://github.com/Pawansingh3889/sql-guard/pull/29">W019 count-distinct-unbounded</a> (mvanhorn), <a href="https://github.com/Pawansingh3889/sql-guard/pull/12">W011 union-without-all</a> and <a href="https://github.com/Pawansingh3889/sql-guard/pull/25">P005 sqlalchemy-text-fstring</a> (tmchow). Publish to PyPI via Trusted Publishing, maintain governance + security policy, run a v0.7 milestone with public ROADMAP and a scaffold script for new contributors. Two more rule PRs in active review.</p>
+                    <p>Five outside contributors have merged eleven lint rules into it. Six came from <a href="https://github.com/mvanhorn">@mvanhorn</a> (<a href="https://github.com/Pawansingh3889/sql-guard/pull/29">W019</a>, W016, W015, W023, W021, W012), with <a href="https://github.com/Pawansingh3889/sql-guard/pull/12">W011</a> and <a href="https://github.com/Pawansingh3889/sql-guard/pull/25">P005</a> from @tmchow and the <a href="https://github.com/Pawansingh3889/sql-guard/pull/21">OVER() window check</a> from @Prabhu-1409. I run the review queue, publish to PyPI via Trusted Publishing (6,000+ downloads, 500+ a month), maintain the security and governance policy, and keep a public ROADMAP plus a one-file scaffold so a new contributor can add a rule without touching the core.</p>
                 </div>
             </div>
             <div class="num-card">
