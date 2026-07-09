@@ -91,6 +91,11 @@
         .about-card:hover { box-shadow: var(--accent-glow); border-color: var(--accent); transform: translateY(-3px); }
         .about-card h3 { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 0.7rem; }
         .about-card p { font-size: 0.93rem; color: var(--text); line-height: 1.72; }
+        .about-card ul { list-style: none; margin: 0; padding: 0; }
+        .about-card li { font-size: 0.9rem; color: var(--text); line-height: 1.5; padding: 0.55rem 0 0.55rem 1.2rem; position: relative; border-top: 1px solid var(--border); }
+        .about-card li:first-child { border-top: none; padding-top: 0.1rem; }
+        .about-card li::before { content: '▹'; color: var(--accent); position: absolute; left: 0; }
+        .about-card li b { color: var(--text-bright, #fff); font-weight: 600; }
         /* left-to-right staggered slide, only once the reveal system marks the section in view */
         .reveal .about-card { opacity: 0; transform: translateX(-44px); }
         .reveal.in .about-card { animation: slideInLeft 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
@@ -363,21 +368,35 @@
 
         <div class="about-head">
             <img src="me.jpg" alt="Pawan Singh Kapkoti in a Yorkshire park" loading="lazy"/>
-            <p class="about-lead">Yorkshire-based data and AI engineer. I build data pipelines and on-prem AI, and I keep the tools I rely on honest by contributing upstream. Three ways I work:</p>
+            <p class="about-lead">Yorkshire-based data and AI engineer. Governance tooling for SQL and AI agents, built in the open and runnable on-prem.</p>
         </div>
 
         <div class="about-track">
             <div class="about-card">
-                <h3>// BUILD</h3>
-                <p>I build data pipelines and on-prem AI for regulated data teams: incremental ETL from ERP systems, dbt marts with SLO monitoring, and a free, on-prem governed agent stack that lets you query a real database in plain English and audit every step. Several Python tools live on PyPI (sql-sop, sql-sop-mcp, sql-explorer-mcp, pr-sop, morning-brief), each with a real problem behind it that I hit on the floor before writing a line of code.</p>
+                <h3>// SHIPPED</h3>
+                <ul>
+                    <li><b>Governed agent stack</b> — query a real database in plain English, audit every step. Free, on-prem.</li>
+                    <li><b>7 tools on PyPI</b>: sql-sop, sql-steward, query-warden, thread-recall, sql-explorer-mcp, sql-sop-mcp, pii-veil</li>
+                    <li><b>sql-steward</b> listed in the official MCP registry</li>
+                    <li>ETL from ERP systems into dbt marts with SLO monitoring</li>
+                </ul>
             </div>
             <div class="about-card">
-                <h3>// DEPLOY</h3>
-                <p>Local AI for regulated environments. LangGraph agents that talk to MCP servers, ChromaDB and pgvector RAG, Ollama-served models, all on-prem so no batch data leaves the building. Between the model and the database sits a schema-aware validation gate and a self-correcting repair loop, and every answer records the model and prompt that produced it, so an audited result can be reproduced.</p>
+                <h3>// ARCHITECTURE</h3>
+                <ul>
+                    <li>LangGraph agents over MCP servers; ChromaDB and pgvector RAG; Ollama models</li>
+                    <li>Schema-aware validation gate with a self-correcting repair loop</li>
+                    <li>Every answer records its model and prompt — reproducible, audited</li>
+                    <li>Fully on-prem; no batch data leaves the building</li>
+                </ul>
             </div>
             <div class="about-card">
-                <h3>// CONTRIBUTE</h3>
-                <p>I learn tools by reading their source: reverse-engineer the architecture, find the gap, ship the fix. Merged PRs into pandas, ChromaDB, scanapi, dlt, dbt-core, ollama-python, fpdf2, pyOpenSci, and Apache Superset.</p>
+                <h3>// UPSTREAM</h3>
+                <ul>
+                    <li><b>Merged</b>: pandas, dlt, dbt-core, Apache Superset, sqlglot, drt, fpdf2, scanapi</li>
+                    <li><b>In review</b>: ONS, NHS England, Octopus Energy, GOV.UK, DuckDB</li>
+                    <li>Read the source, find the gap, ship the fix</li>
+                </ul>
             </div>
         </div>
     </div>
