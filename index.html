@@ -134,6 +134,31 @@
         .more-list { list-style: none; display: grid; gap: 0.7rem; }
         .more-list li { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
         .more-list a { font-weight: 600; }
+        /* ---- flagship + subordinate governance layer ---- */
+        .project-card.flagship { grid-column: 1 / -1; border-color: var(--border-strong); background:
+            linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 55%); position: relative; padding-top: 2.1rem; }
+        .flag-tag { position: absolute; top: 1rem; right: 1.4rem; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem; font-weight: 700; letter-spacing: 0.22em; color: var(--accent);
+            border: 1px solid var(--accent); border-radius: 999px; padding: 0.22rem 0.7rem; }
+        .project-card.flagship h3 { font-size: 1.45rem; }
+        @media (min-width: 1100px) { .project-card.flagship p { max-width: 70ch; } }
+        .govlayer { grid-column: 1 / -1; margin: 0.2rem 0 0.4rem; padding: 1.5rem 1.8rem;
+            border: 1px dashed var(--border-strong); border-radius: 12px; background: var(--surface); }
+        .govlayer-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.72rem;
+            font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.35rem; }
+        .govlayer-sub { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.1rem; }
+        .govlayer-sub b { color: var(--text); font-weight: 600; }
+        .comp-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+        @media (min-width: 720px) { .comp-grid { grid-template-columns: 1fr 1fr; } }
+        .comp-card { padding: 1.05rem 1.2rem; background: var(--bg); border: 1px solid var(--border);
+            border-radius: 9px; transition: border-color 0.2s; }
+        .comp-card:hover { border-color: var(--accent); }
+        .comp-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent);
+            margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem; }
+        .comp-card h4 a { color: var(--accent); }
+        .comp-card .role { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--dim); font-weight: 700; }
+        .comp-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
 
         /* Stack with icons */
         .stack-group { margin-bottom: 2rem; }
@@ -385,9 +410,8 @@
             <div class="about-card">
                 <h3>// SHIPPED</h3>
                 <ul>
-                    <li><b>Governed agent stack</b> — query a real database in plain English, audit every step. Free, on-prem.</li>
-                    <li><b>7 tools on PyPI</b>: sql-sop, sql-steward, query-warden, thread-recall, sql-explorer-mcp, sql-sop-mcp, pii-veil</li>
-                    <li><b>sql-steward</b> listed in the official MCP registry</li>
+                    <li><b>sql-steward</b> — a semantic-layer MCP server where an AI agent queries a real database and never writes SQL. On PyPI and in the official MCP registry.</li>
+                    <li>Its on-prem <b>governance layer</b>: schema-scout maps, query-warden gates access, pii-veil redacts, agent-blackbox audits. Seven packages on PyPI in all.</li>
                     <li>ETL from ERP systems into dbt marts with SLO monitoring</li>
                 </ul>
             </div>
@@ -496,33 +520,53 @@
 
         <div class="projects-grid">
 
-            <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="8" y="9" width="28" height="6" rx="1.5"/><rect x="8" y="19" width="28" height="6" rx="1.5"/><rect x="8" y="29" width="28" height="6" rx="1.5" class="hl"/></svg><span class="num">_01</span></div>
-                <h3>Governed Agent Stack</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/governed-agent-stack">Code</a></div>
-                <p>Free, on-prem building blocks for an AI agent you can point at a real database and audit. Small tools compose into one governed plane: schema-scout maps the data, sql-steward compiles every query from a semantic layer, query-warden and pii-veil fence in role-checked access, and agent-blackbox keeps a tamper-evident record. The governance is the point, not another gateway: every call is authenticated, policy-checked, budgeted, and logged, and nothing leaves the building.</p>
-                <div class="stats">governed plane · RBAC · PII refusal · tamper-evident audit · on-prem</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">MCP</span><span class="badge">Ollama</span><span class="badge">SQL Server</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="12" r="2.6"/><circle cx="9" cy="22" r="2.6"/><circle cx="9" cy="32" r="2.6"/><path d="M12 12 L21 22 M12 22 L21 22 M12 32 L21 22"/><rect class="hl" x="22" y="15.5" width="15" height="13" rx="2"/><path class="hl" d="M25 22 h9"/></svg><span class="num">_02</span></div>
+            <div class="project-card flagship">
+                <div class="flag-tag">FLAGSHIP</div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="12" r="2.6"/><circle cx="9" cy="22" r="2.6"/><circle cx="9" cy="32" r="2.6"/><path d="M12 12 L21 22 M12 22 L21 22 M12 32 L21 22"/><rect class="hl" x="22" y="15.5" width="15" height="13" rx="2"/><path class="hl" d="M25 22 h9"/></svg><span class="num">_01</span></div>
                 <h3>sql-steward</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a> &middot; <a href="governance-split.html">Live demo</a></div>
-                <p>The flagship of the stack: one governed MCP server where the agent never writes SQL. Every query is compiled from a semantic layer you control (entities, joins, metrics, PII tags), so there is no run_sql tool to misuse. Blocked PII is refused before the query runs, declared data-quality checks gate the results, and <code>init --from-db</code> drafts a reviewable layer from a live schema so it scales past a toy database. Same tools across SQL Server, Postgres, and SQLite; query-warden, pii-veil, and agent-blackbox wire in as optional layers.</p>
-                <div class="stats">semantic layer · no raw SQL · init --from-db · data-quality checks · 3 engines</div>
+                <div class="links"><a href="https://github.com/Pawansingh3889/sql-steward">Code</a> &middot; <a href="governance-split.html">Live demo</a> &middot; <a href="https://pypi.org/project/sql-steward/">PyPI</a></div>
+                <p>The core product: a governed MCP server where an AI agent queries a real database and never writes SQL. Every query is compiled from a semantic layer you control — entities, joins, metrics, PII tags — so there is no <code>run_sql</code> tool to misuse. Blocked PII is refused before the query runs, declared data-quality checks gate the results, and <code>init --from-db</code> drafts a reviewable layer straight from a live schema, so it scales past a toy database. Same tools across SQL Server, Postgres, and SQLite. Listed in the official MCP registry.</p>
+                <div class="stats">semantic layer · no raw SQL · init --from-db · data-quality gates · 3 engines · MCP registry</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">FastMCP</span><span class="badge">sqlglot</span><span class="badge">SQLAlchemy</span>
                 </div>
             </div>
 
+            <div class="govlayer">
+                <div class="govlayer-label">// The governance layer</div>
+                <p class="govlayer-sub">Four small, on-prem tools that plug into <b>sql-steward</b> — each does one job, each ships on PyPI, none needs the cloud.</p>
+                <div class="comp-grid">
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/schema-scout">schema-scout</a> <span class="role">map</span></h4>
+                        <p>Reverse-engineers a 150+ table SQL Server database into an AI-ready catalog, inferring foreign keys and flagging PII. This is what <code>init --from-db</code> reads.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/query-warden">query-warden</a> <span class="role">access</span></h4>
+                        <p>YAML role-based access control for SQL, enforced before the query runs. A role can be denied a table or a single column and never sees a row of it.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h4><a href="https://pypi.org/project/pii-veil/">pii-veil</a> <span class="role">redact</span></h4>
+                        <p>Column-level PII masking and refusal. Tagged columns are masked in the result or blocked outright at compile time, before a query ever touches the data.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/agent-blackbox">agent-blackbox</a> <span class="role">audit</span></h4>
+                        <p>Append-only, hash-chained ledger: each row stores the hash of the one before it, so any later edit breaks the chain and <code>verify()</code> points at it. One SQLite file, zero deps.</p>
+                        <div class="chainmini" aria-label="Hovering a block breaks the hash chain from that point on.">
+                            <span class="cblk" tabindex="0">#01 3f9c&#8230;</span>
+                            <span class="cblk" tabindex="0">#02 a71e&#8230;</span>
+                            <span class="cblk" tabindex="0">#03 0b4d&#8230;</span>
+                            <span class="broke">chain broken &#10007;</span>
+                        </div>
+                        <div class="chainmini-hint">Hover a block — every block after it breaks.</div>
+                    </div>
+                </div>
+            </div>
+
             <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M34 22 a12 12 0 1 1-3.5-8.5"/><path class="hl" d="M31 8.5 l0 6 -6 0"/></svg><span class="num">_03</span></div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M34 22 a12 12 0 1 1-3.5-8.5"/><path class="hl" d="M31 8.5 l0 6 -6 0"/></svg><span class="num">_02</span></div>
                 <h3>FloorMind</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/FloorMind">Code</a> · <a href="https://pawansingh3889.github.io/FloorMind/">Docs</a></div>
-                <p>On-prem natural-language-to-SQL over manufacturing data. A LangGraph agent turns plain English into a schema-validated query and answer in seconds, served by a local LLM via Ollama. One governed path: a validation gate, a self-correcting repair loop that feeds errors back to the model, and a tamper-evident agent-blackbox ledger that records the model and prompt behind every answer. Eval score tracked per release, not vibes.</p>
+                <p>The stack applied end to end: on-prem natural-language-to-SQL over a real operational database. A LangGraph agent turns plain English into a schema-validated query and answer in seconds, served by a local LLM via Ollama. One governed path — a validation gate, a self-correcting repair loop that feeds errors back to the model, and a tamper-evident agent-blackbox ledger that records the model and prompt behind every answer. Eval score tracked per release, not vibes.</p>
                 <div class="stats">LangGraph · local LLM · repair loop · model-provenance audit · eval-scored</div>
                 <div class="badges">
                     <span class="badge">Python</span><span class="badge">LangGraph</span><span class="badge">Ollama</span><span class="badge">Streamlit</span><span class="badge">ChromaDB</span>
@@ -530,36 +574,7 @@
             </div>
 
             <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="6" y="16" width="12" height="12" rx="2"/><rect x="26" y="16" width="12" height="12" rx="2" class="hl"/><path d="M18 22 h8"/></svg><span class="num">_04</span></div>
-                <h3>agent-blackbox</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/agent-blackbox">Code</a></div>
-                <p>An append-only, hash-chained ledger that gives AI agent actions a tamper-evident audit trail. Each row stores the hash of the row before it, so any edit after the fact breaks the chain and <code>verify()</code> points at it. Optional HMAC keying. On-prem, zero dependencies, a single SQLite file.</p>
-                <div class="chainmini" aria-label="Hovering a block breaks the hash chain from that point on.">
-                    <span class="cblk" tabindex="0">#01 3f9c&#8230;</span>
-                    <span class="cblk" tabindex="0">#02 a71e&#8230;</span>
-                    <span class="cblk" tabindex="0">#03 0b4d&#8230;</span>
-                    <span class="broke">chain broken &#10007;</span>
-                </div>
-                <div class="chainmini-hint">Hover a block to edit it, and every block after it breaks.</div>
-                <div class="stats">hash-chained · tamper-evident · HMAC option · zero deps</div>
-                <div class="badges">
-                    <span class="badge">Python</span><span class="badge">SQLite</span><span class="badge">SHA-256</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 30 a13 13 0 0 1 26 0"/><path class="hl" d="M22 30 L30 21"/><circle cx="22" cy="30" r="1.6" fill="currentColor" stroke="none"/></svg><span class="num">_05</span></div>
-                <h3>Manufacturing Compliance Dashboard</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
-                <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
-                <div class="stats">MCP server · NL query · /metrics · SLO monitoring</div>
-                <div class="badges">
-                    <span class="live-badge">Live</span><span class="badge">Streamlit</span><span class="badge">FastMCP</span><span class="badge">FastAPI</span><span class="badge">PySpark</span><span class="badge">Plotly</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="11" cy="12" rx="5" ry="2.2"/><path d="M6 12 v8 a5 2.2 0 0 0 10 0 v-8"/><path d="M18 22 h6"/><rect x="25" y="10" width="6" height="6" rx="1" class="hl"/><rect x="25" y="19" width="6" height="6" rx="1" class="hl"/><rect x="34" y="14.5" width="6" height="6" rx="1" class="hl"/></svg><span class="num">_06</span></div>
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="11" cy="12" rx="5" ry="2.2"/><path d="M6 12 v8 a5 2.2 0 0 0 10 0 v-8"/><path d="M18 22 h6"/><rect x="25" y="10" width="6" height="6" rx="1" class="hl"/><rect x="25" y="19" width="6" height="6" rx="1" class="hl"/><rect x="34" y="14.5" width="6" height="6" rx="1" class="hl"/></svg><span class="num">_03</span></div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
                 <p>End-to-end data pipeline. Police UK API to PostgreSQL and BigQuery. 6 dbt marts (outcome analysis, YoY trends), 65 tests. Polars-based alternative ingestion. Declarative validation, SLO monitoring, pipeline maturity scorecard.</p>
@@ -569,14 +584,21 @@
                 </div>
             </div>
 
+            <div class="project-card">
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 30 a13 13 0 0 1 26 0"/><path class="hl" d="M22 30 L30 21"/><circle cx="22" cy="30" r="1.6" fill="currentColor" stroke="none"/></svg><span class="num">_04</span></div>
+                <h3>Manufacturing Compliance Dashboard</h3>
+                <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
+                <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
+                <div class="stats">MCP server · NL query · /metrics · SLO monitoring</div>
+                <div class="badges">
+                    <span class="live-badge">Live</span><span class="badge">Streamlit</span><span class="badge">FastMCP</span><span class="badge">FastAPI</span><span class="badge">PySpark</span><span class="badge">Plotly</span>
+                </div>
+            </div>
+
             <div class="more">
                 <div class="more-label">More on GitHub &amp; PyPI</div>
                 <ul class="more-list">
-                    <li><a href="https://github.com/Pawansingh3889/sql-sop">sql-sop</a> — rule-based SQL linter: 39 rules, a libCST injection scanner, SARIF output, external contributors (PyPI)</li>
-                    <li><a href="https://github.com/Pawansingh3889/schema-scout">schema-scout</a> — reverse-engineers a 150+ table SQL Server database into an AI-ready catalog with FK inference and PII flags</li>
-                    <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>
-                    <li><a href="https://github.com/Pawansingh3889/query-warden">query-warden</a> — YAML role-based access control for SQL, enforced before the query runs</li>
-                    <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
+                    <li><a href="https://github.com/Pawansingh3889/sql-sop">sql-sop</a> — rule-based SQL linter: 39 rules, a libCST injection scanner, SARIF output, external contributors (PyPI)</li>                    <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>                    <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/morning-brief">morning-brief</a> — rule-based Gmail triage, zero LLM, read-only OAuth (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/sql-ops-reviewer">SQL Ops Reviewer</a> — GitHub Action that reviews .sql files in PRs with a local model, no API keys</li>
                     <li><a href="https://hackathon-ioqp.onrender.com">MediAsk</a> — hackathon health Q&amp;A app: NHS-verified guidance, 18 languages, voice input</li>
