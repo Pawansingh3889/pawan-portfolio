@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Front Door — governed SQL access, live</title>
+    <meta name="description" content="A working demo of the gatekeeper pattern: every statement an agent sends is checked against policy before it reaches the warehouse, and every verdict is written to an audit ledger.">
+    <meta property="og:title" content="The Front Door — governed SQL access, live">
+    <meta property="og:description" content="Type SQL, watch the policy allow or refuse it, read the ledger. The pattern behind my governed agent stack.">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0e27;
+            --bg-deep: #060920;
+            --surface: #141a3a;
+            --surface-2: #1a2148;
+            --border: rgba(0, 212, 255, 0.08);
+            --border-strong: rgba(0, 212, 255, 0.22);
+            --text: #e8e9f3;
+            --muted: #8b95b8;
+            --dim: #6b7494;
+            --accent: #00d4ff;
+            --accent-soft: rgba(0, 212, 255, 0.12);
+            --link: #00d4ff;
+            --allow: #3ddc97;
+            --allow-soft: rgba(61, 220, 151, 0.12);
+            --refuse: #ff6b61;
+            --refuse-soft: rgba(255, 107, 97, 0.13);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); min-height: 100vh; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+        .container { max-width: 880px; margin: 0 auto; padding: 0 1.6rem; }
+
+        .top { padding: 3.2rem 0 2.2rem; }
+        .crumb { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.1rem; }
+        .crumb a { color: var(--dim); }
+        .crumb a:hover { color: var(--accent); text-decoration: none; }
+        h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 0.9rem; text-wrap: balance; }
+        h1 .hl { color: var(--accent); }
+        .lede { color: var(--muted); font-size: 1.05rem; max-width: 62ch; }
+        .lede strong { color: var(--text); font-weight: 600; }
+
+        /* Demo */
+        .demo { margin: 2.4rem 0 1.2rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 12px; overflow: hidden; }
+        .demo-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.85rem 1.2rem; background: var(--bg-deep); border-bottom: 1px solid var(--border); }
+        .demo-title { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+        .demo-note { font-size: 0.78rem; color: var(--dim); }
+        .demo-body { padding: 1.2rem; }
+        .demo-input-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+        .demo-input { flex: 1 1 320px; font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; color: var(--text); background: var(--bg-deep); border: 1px solid var(--border-strong); border-radius: 8px; padding: 0.75rem 0.9rem; outline: none; }
+        .demo-input:focus { border-color: var(--accent); }
+        .demo-send { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.88rem; color: var(--bg-deep); background: var(--accent); border: none; border-radius: 8px; padding: 0.75rem 1.3rem; cursor: pointer; }
+        .demo-send:hover { filter: brightness(1.12); }
+        .demo-send:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+        .chips { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem; }
+        .chip { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; padding: 0.35rem 0.85rem; cursor: pointer; }
+        .chip:hover { color: var(--text); border-color: var(--border-strong); }
+
+        .verdict { margin-top: 1.1rem; border-radius: 10px; padding: 0.95rem 1.1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; display: none; }
+        .verdict.allow { display: block; background: var(--allow-soft); border: 1px solid var(--allow); color: var(--allow); }
+        .verdict.refuse { display: block; background: var(--refuse-soft); border: 1px solid var(--refuse); color: var(--refuse); }
+
+        .ledger { margin-top: 1.4rem; }
+        .ledger-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.6rem; }
+        .ledger-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; max-height: 220px; overflow-y: auto; }
+        .ledger-list li { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); background: var(--bg-deep); border: 1px solid var(--border); border-left-width: 3px; border-radius: 6px; padding: 0.5rem 0.75rem; overflow-x: auto; white-space: nowrap; }
+        .ledger-list li.allow { border-left-color: var(--allow); }
+        .ledger-list li.refuse { border-left-color: var(--refuse); }
+        .ledger-list .t { color: var(--dim); }
+        .ledger-empty { font-size: 0.82rem; color: var(--dim); font-style: italic; }
+
+        .fineprint { font-size: 0.8rem; color: var(--dim); margin-top: 0.9rem; max-width: 68ch; }
+
+        /* Sections */
+        section { padding: 2.6rem 0; border-top: 1px solid var(--border); }
+        h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.01em; }
+        h2 .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.95rem; margin-right: 0.5rem; }
+        p + p { margin-top: 0.9rem; }
+        .prose { color: var(--muted); max-width: 68ch; }
+        .prose strong { color: var(--text); font-weight: 600; }
+
+        .flow { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--muted); background: var(--bg-deep); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.2rem; overflow-x: auto; margin: 1.2rem 0; line-height: 1.9; white-space: pre; }
+        .flow .a { color: var(--accent); }
+        .flow .g { color: var(--allow); }
+        .flow .r { color: var(--refuse); }
+
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.4rem; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.3rem; }
+        .card h3 { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; color: var(--accent); margin-bottom: 0.5rem; }
+        .card p { font-size: 0.88rem; color: var(--muted); }
+        .card .foot { margin-top: 0.8rem; font-size: 0.8rem; }
+
+        footer { border-top: 1px solid var(--border); padding: 2rem 0 3rem; color: var(--dim); font-size: 0.85rem; }
+
+        @media (max-width: 640px) {
+            .demo-head { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="crumb"><a href="index.html">pawan singh kapkoti</a> / gatekeeper</div>
+            <h1>Every query knocks on a door.<br>This is the <span class="hl">door</span>.</h1>
+            <p class="lede">AI agents are being pointed at production databases. The safe way to do that is not trust, it is a <strong>gatekeeper</strong>: one identity that can reach the data, running policy over every statement, writing every verdict to a ledger nobody can quietly edit. Try it below.</p>
+        </div>
+
+        <div class="demo">
+            <div class="demo-head">
+                <span class="demo-title">sql_guard // live policy</span>
+                <span class="demo-note">runs in your browser, same rule the real gateway enforces in a container</span>
+            </div>
+            <div class="demo-body">
+                <div class="demo-input-row">
+                    <input id="stmt" class="demo-input" type="text" spellcheck="false"
+                           placeholder="type a SQL statement, e.g. SELECT * FROM orders"
+                           aria-label="SQL statement to test against the policy">
+                    <button id="send" class="demo-send" type="button">send to gateway</button>
+                </div>
+                <div class="chips" aria-label="example statements">
+                    <button class="chip" type="button">SELECT customer, sum(margin) FROM sales GROUP BY 1</button>
+                    <button class="chip" type="button">DELETE FROM orders WHERE 1=1</button>
+                    <button class="chip" type="button">DROP TABLE customers</button>
+                    <button class="chip" type="button">UPDATE prices SET gbp = 0</button>
+                </div>
+                <div id="verdict" class="verdict" role="status" aria-live="polite"></div>
+                <div class="ledger">
+                    <div class="ledger-label">append-only ledger</div>
+                    <ul id="ledger" class="ledger-list"><li class="ledger-empty">no entries yet, send a statement</li></ul>
+                </div>
+            </div>
+        </div>
+        <p class="fineprint">The rule here is the smallest useful policy: reads pass, writes and DDL are refused, and both outcomes are recorded. The production version does much more (schema scoping, row limits, PII masking), but the shape never changes: policy first, database second, ledger always.</p>
+
+        <section id="how">
+            <h2><span class="num">01</span>How the real one is wired</h2>
+            <div class="prose">
+                <p>The demo above is the policy alone. In the real stack, the policy lives in a gateway container that owns the <strong>only credential</strong> with access to the data platform. Agents, notebooks and BI tools hold no database identity at all. Whatever they want, they ask the gateway, and the gateway answers with an allow, a refusal, or a rewritten, bounded query.</p>
+            </div>
+            <div class="flow">agents / notebooks / BI ──▶ <span class="a">gateway (policy + ledger)</span> ──▶ data platform
+                                     │
+                                     ▼
+                            <span class="a">SIEM / audit sink</span>
+   <span class="g">SELECT … allowed, logged</span>        <span class="r">DROP … refused, logged</span></div>
+            <div class="prose">
+                <p>The identity wiring is the part most setups skip, so I wrote it as a Terraform module: a Microsoft Fabric workspace where the gateway's service principal is the only granted data role, secret rotation and the audit sink included, honest documentation of what the preview provider cannot enforce yet. The module goes public alongside a live walkthrough.</p>
+            </div>
+        </section>
+
+        <section id="receipts">
+            <h2><span class="num">02</span>Receipts</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>sql-sop</h3>
+                    <p>The standards half: a SQL reviewer with 38 rules and 149 tests that catches the mistakes before they ship. 500+ downloads a month.</p>
+                    <p class="foot"><a href="https://github.com/Pawansingh3889/sql-sop">github.com/Pawansingh3889/sql-sop</a></p>
+                </div>
+                <div class="card">
+                    <h3>upstream security review</h3>
+                    <p>Reviewed a maintainer's data-redaction PR in a reverse-ETL tool: two verified findings (a bucket-name leak and an unstable node id), both fixed same day, my handle in the fix commit.</p>
+                    <p class="foot"><a href="https://github.com/drt-hub/drt/pull/805">drt#805</a> · <a href="https://github.com/drt-hub/drt/pull/807">drt#807</a></p>
+                </div>
+                <div class="card">
+                    <h3>merged where it counts</h3>
+                    <p>Contributions merged into Apache Superset, sqlglot, Open Food Facts and a dozen other data tools. Small fixes, real users.</p>
+                    <p class="foot"><a href="https://github.com/apache/superset/pull/39118">superset#39118</a> · <a href="https://github.com/tobymao/sqlglot/pull/7824">sqlglot#7824</a></p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container" style="padding:0">
+                Pawan Singh Kapkoti · data &amp; analytics engineer, Yorkshire UK · <a href="index.html">full portfolio</a> · <a href="https://github.com/Pawansingh3889">github</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            var blocked = ["insert", "update", "delete", "drop", "alter", "truncate", "create", "grant"];
+            var input = document.getElementById("stmt");
+            var send = document.getElementById("send");
+            var verdict = document.getElementById("verdict");
+            var ledger = document.getElementById("ledger");
+            var empty = true;
+
+            function verb(s) {
+                var m = s.trim().toLowerCase().match(/^[a-z]+/);
+                return m ? m[0] : "";
+            }
+
+            function judge(s) {
+                var v = verb(s);
+                if (v === "select") return { allow: true, reason: "read-only statement" };
+                if (blocked.indexOf(v) !== -1) return { allow: false, reason: "statement verb \"" + v + "\" is not permitted by sql_guard" };
+                return { allow: false, reason: "unrecognised verb \"" + (v || "?") + "\", the gate fails closed" };
+            }
+
+            function stamp() {
+                var d = new Date();
+                return d.toTimeString().slice(0, 8);
+            }
+
+            function run() {
+                var s = input.value.trim();
+                if (!s) { input.focus(); return; }
+                var r = judge(s);
+                verdict.className = "verdict " + (r.allow ? "allow" : "refuse");
+                verdict.textContent = (r.allow ? "ALLOWED  " : "REFUSED  ") + "· " + r.reason;
+                if (empty) { ledger.innerHTML = ""; empty = false; }
+                var li = document.createElement("li");
+                li.className = r.allow ? "allow" : "refuse";
+                li.textContent = "";
+                var t = document.createElement("span");
+                t.className = "t";
+                t.textContent = stamp() + "  ";
+                li.appendChild(t);
+                li.appendChild(document.createTextNode((r.allow ? "ALLOW  " : "REFUSE ") + s));
+                ledger.insertBefore(li, ledger.firstChild);
+            }
+
+            send.addEventListener("click", run);
+            input.addEventListener("keydown", function (e) { if (e.key === "Enter") run(); });
+            document.querySelectorAll(".chip").forEach(function (c) {
+                c.addEventListener("click", function () { input.value = c.textContent; run(); });
+            });
+        })();
+    </script>
+</body>
+</html>
