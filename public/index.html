@@ -437,8 +437,8 @@
             <div class="about-card">
                 <h3>// UPSTREAM</h3>
                 <ul>
-                    <li><b>Merged</b>: pandas, dlt, dbt-core, Apache Superset, sqlglot, drt, fpdf2, scanapi</li>
-                    <li><b>In review</b>: ONS, NHS England, Octopus Energy, GOV.UK, DuckDB</li>
+                    <li><b>49 merged</b> upstream: drt (32), Apache Superset, sqlglot, SQLFluff, scanapi, fpdf2, DuckDB, dlt, Open Food Facts, Electricity Maps</li>
+                    <li><b>In review</b>: SQLMesh, sops, Octopus Energy, dlt, textual-fastdatatable</li>
                     <li>Read the source, find the gap, ship the fix</li>
                 </ul>
             </div>
@@ -587,6 +587,25 @@
                 </div>
             </div>
 
+            <div class="govlayer">
+                <div class="govlayer-label">// The payments line</div>
+                <p class="govlayer-sub">The same argument as the governance layer, moved to money: an agent should not be trusted with a payment rail just because it can reach one. Three tools, each public.</p>
+                <div class="comp-grid">
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/steward">steward</a> <span class="role">delegate</span></h4>
+                        <p>An agent that spends someone else's money. It starts from the asymmetry the socks-buying demos skip: the person spending and the person paying are different people, and the payer cannot approve every purchase. The spender texts; the sponsor's policy decides. The sponsor sees decisions, the ledger and escalations — never the conversation.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/pay-warden">pay-warden</a> <span class="role">gate</span></h4>
+                        <p>The policy engine underneath, as an MCP server. Budgets, per-purchase caps, merchant deny-lists, velocity windows and a human-approval threshold are evaluated <em>before</em> a request reaches the payment rail. Amounts are exact decimals converted through declared rates, so pricing in a weaker currency cannot slip a cap.</p>
+                    </div>
+                    <div class="comp-card">
+                        <h4><a href="https://github.com/Pawansingh3889/payoptimize">payoptimize</a> <span class="role">route</span></h4>
+                        <p>Once a purchase is allowed, it still has to authorise. Routes each payment to the provider most likely to accept it — discounted Thompson sampling over live authorisation rates, with a decline-aware cascade that retries the next-best rail instead of failing the customer.</p>
+                    </div>
+                </div>
+            </div>
+
             <div class="project-card">
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="11" cy="12" rx="5" ry="2.2"/><path d="M6 12 v8 a5 2.2 0 0 0 10 0 v-8"/><path d="M18 22 h6"/><rect x="25" y="10" width="6" height="6" rx="1" class="hl"/><rect x="25" y="19" width="6" height="6" rx="1" class="hl"/><rect x="34" y="14.5" width="6" height="6" rx="1" class="hl"/></svg><span class="num">_02</span></div>
                 <h3>UK Crime Pipeline</h3>
@@ -714,7 +733,7 @@
                         <img src="https://www.google.com/s2/favicons?domain=github.com/drt-hub&sz=64" alt=""/>
                         <h3>drt-hub/drt</h3>
                     </div>
-                    <div class="meta">Collaborator — destinations, --threads, --quiet, json_columns review</div>
+                    <div class="meta">Collaborator — 32 merged PRs across destinations, --threads, --quiet, json_columns review</div>
                     <p>Collaborator on the multi-source data sync engine across three releases. v0.5: destination connectors including <a href="https://github.com/drt-hub/drt/pull/608">Mixpanel</a> and the official <a href="https://github.com/drt-hub/drt/pull/332">connector tutorial</a>. v0.6: <a href="https://github.com/drt-hub/drt/pull/335"><code>--threads N</code></a> parallel orchestration with a thread-safe StateManager and 11 parallel-dispatch tests. v0.7: <a href="https://github.com/drt-hub/drt/pull/408"><code>--quiet</code></a> for CI/cron use cases. Plus reviewer voice on the json_columns config PR where the early-validation suggestion shaped the final implementation.</p>
                 </div>
             </div>
@@ -795,14 +814,14 @@
         </div>
 
         <div class="pr-review">
-            <div class="lbl">// Open, in review — six more opened this month</div>
+            <div class="lbl">// Open, in review</div>
             <ul>
-                <li><a href="https://github.com/ONSdigital/rdsa-utils/pull/245">ONS · rdsa-utils#245</a> — human-readable pipeline run-ID generator, validator and parser</li>
-                <li><a href="https://github.com/nhsengland/nhse-rap-cookiecutter/pull/78">NHS England · #78</a> — cross-platform command detection, fixing setup on Windows</li>
-                <li><a href="https://github.com/co-cddo/gds-idea-box2.0/pull/98">GOV.UK / CDDO · #98</a> — SharePoint list pagination bug silently truncating past 200 rows</li>
-                <li><a href="https://github.com/duckdb/duckdb-web/pull/7002">DuckDB · duckdb-web#7002</a> — documented the full set of MySQL-extension settings</li>
                 <li><a href="https://github.com/SQLMesh/sqlmesh/pull/5888">SQLMesh · #5888</a> — hex-string surrogate keys for SHA256/512 on Presto/Trino</li>
-                <li><a href="https://github.com/apache/superset/pull/41799">Apache Superset · #41799</a> — GranularExportControls download-permission follow-up</li>
+                <li><a href="https://github.com/getsops/sops/pull/2262">sops · #2262</a> — stop requiring a matching creation rule when a key is given explicitly</li>
+                <li><a href="https://github.com/dlt-hub/dlt/pull/4026">dlt · #4026</a> — resolve GCP service-account against oauth credentials correctly</li>
+                <li><a href="https://github.com/octopus-energy/tentaclio/pull/243">Octopus Energy · tentaclio#243</a> — expand <code>~</code> in the credentials file path</li>
+                <li><a href="https://github.com/tconbeer/textual-fastdatatable/pull/154">textual-fastdatatable · #154</a> — escape and truncate bytes values in the cell formatter</li>
+                <li><a href="https://github.com/drt-hub/drt/pull/902">drt · #902</a> — <code>drt serve</code> delivery contract: coalescing, 202 + run id, pluggable auth</li>
             </ul>
         </div>
     </div>
