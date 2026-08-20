@@ -422,6 +422,7 @@
                 <ul>
                     <li><b>sql-steward</b> — a semantic-layer MCP server where an AI agent queries a real database and never writes SQL. On PyPI and in the official MCP registry.</li>
                     <li>Its on-prem <b>governance layer</b>: schema-scout maps, query-warden gates access, pii-veil redacts, agent-blackbox audits. Seven packages on PyPI in all.</li>
+                    <li>The <b>governed-agent-stack</b>: FloorMind, elenchus and the audit layer in one monorepo behind a single Next.js console, every backend proxied server-side.</li>
                     <li>ETL from ERP systems into dbt marts with SLO monitoring</li>
                 </ul>
             </div>
@@ -625,6 +626,17 @@
                 <div class="stats">MCP server · NL query · /metrics · SLO monitoring</div>
                 <div class="badges">
                     <span class="live-badge">Live</span><span class="badge">Streamlit</span><span class="badge">FastMCP</span><span class="badge">FastAPI</span><span class="badge">PySpark</span><span class="badge">Plotly</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect class="hl" x="8" y="10" width="13" height="10" rx="1.5"/><rect class="hl" x="23" y="10" width="13" height="10" rx="1.5"/><path d="M8 26 a6 6 0 0 0 12 0"/><path d="M14.5 32 v-6"/><rect class="hl" x="25" y="24" width="11" height="8" rx="1.5"/><path d="M30.5 21 v3"/></svg><span class="num">_04</span></div>
+                <h3>Governed Agent Stack</h3>
+                <div class="links"><a href="https://github.com/govern-agents/governed-agent-stack">Code</a></div>
+                <p>FloorMind turns a plain-English factory question into SQL that sql-sop lints, query-warden gates by role, pii-veil masks, and agent-blackbox chains into a tamper-evident ledger, while elenchus runs governed surveys alongside. The whole stack is assembled into one monorepo and merged into a single Next.js console: chat, factory KPIs, compliance, waste, documents, surveys, audit and configuration, with every backend proxied server-side so the browser never touches CORS or auth headers.</p>
+                <div class="stats">one console · 13 pages · server-side proxies · SSE streaming · hash-chained audit</div>
+                <div class="badges">
+                    <span class="badge">Next.js</span><span class="badge">TypeScript</span><span class="badge">FastAPI</span><span class="badge">Tailwind</span><span class="badge">SQLite</span>
                 </div>
             </div>
 
