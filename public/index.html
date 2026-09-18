@@ -3,98 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0a0e27">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%230a0e27' stroke='%2300d4ff' stroke-width='2'/><text x='16' y='20' text-anchor='middle' fill='%2300d4ff' font-size='14' font-family='monospace' font-weight='bold'>P</text></svg>">
+    <meta name="theme-color" content="#0c0b0a">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%230c0b0a' stroke='%23c8492e' stroke-width='2'/><text x='16' y='21' text-anchor='middle' fill='%23f1ecdf' font-size='15' font-family='Arial' font-weight='900'>P</text></svg>">
     <title>Pawan Singh Kapkoti — Data & Analytics Engineer</title>
-    <meta name="description" content="Data engineer building on-prem pipelines and the governance layer that makes it safe to point an AI agent at a real database. Greater Noida, Delhi NCR, India.">
+    <meta name="description" content="Data engineer building on-prem pipelines and the governance layer that makes it safe to point an AI agent at a real database. Greater Noida West, Delhi NCR, India.">
     <meta property="og:title" content="Pawan Singh Kapkoti — Data & Analytics Engineer">
     <meta property="og:description" content="On-prem data pipelines and governed AI: a semantic layer that compiles every query and a tamper-evident audit of what the agent did.">
     <meta property="og:type" content="website">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --bg: #0a0e27;
-            --bg-deep: #060920;
-            --surface: #141a3a;
-            --surface-2: #1a2148;
-            --border: rgba(0, 212, 255, 0.08);
-            --border-strong: rgba(0, 212, 255, 0.22);
-            --text: #e8e9f3;
-            --muted: #8b95b8;
-            --dim: #6b7494;
-            --accent: #00d4ff;
-            --accent-soft: rgba(0, 212, 255, 0.12);
-            --accent-glow: 0 8px 24px rgba(0, 0, 0, 0.35);
-            --link: #00d4ff;
-            --refuse: #ff6b61;
-            --refuse-soft: rgba(255, 107, 97, 0.13);
+            --bg: #0c0b0a;
+            --bg-deep: #050504;
+            --surface: #17140f;
+            --surface-2: #1e1a13;
+            --border: rgba(241, 236, 223, 0.09);
+            --border-strong: rgba(241, 236, 223, 0.22);
+            --text: #f1ecdf;
+            --muted: #a89d89;
+            --dim: #6f6555;
+            --accent: #c8492e;
+            --accent-soft: rgba(200, 73, 46, 0.14);
+            --accent-glow: 0 10px 28px rgba(0, 0, 0, 0.4);
+            --link: #5470ff;
+            --link-soft: rgba(84, 112, 255, 0.13);
+            --allow: #3ddc97;
+            --refuse: #ff5c57;
+            --refuse-soft: rgba(255, 92, 87, 0.13);
+            --grid-line: rgba(241, 236, 223, 0.035);
+            --display: 'Archivo Black', 'Inter', sans-serif;
         }
         html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); min-height: 100vh; overflow-x: hidden; }
         a { color: var(--link); text-decoration: none; }
         a:hover { text-decoration: underline; }
         code, .mono { font-family: 'JetBrains Mono', monospace; }
 
-        /* Layout: sidebar + main */
-        .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
-        .sidebar { background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%); border-right: 1px solid var(--border); position: sticky; top: 0; height: 100vh; padding: 2.5rem 1.8rem; overflow-y: auto; }
-        .sidebar::-webkit-scrollbar { width: 4px; }
-        .sidebar::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
-        .main { padding: 0; min-width: 0; }
-        .container { max-width: 920px; margin: 0 auto; padding: 0 2.5rem; }
+        /* ---- grain + fixed texture layers ---- */
+        .grain { position: fixed; inset: -10%; width: 120%; height: 120%; pointer-events: none; z-index: 500;
+            opacity: 0.05; mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 
-        /* Sidebar elements */
-        .sidebar-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: var(--accent); margin-bottom: 2.5rem; }
-        .sidebar-section { margin-bottom: 2rem; }
-        .sidebar-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.9rem; }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 0.4rem; }
-        .sidebar-nav a { display: grid; grid-template-columns: 28px 1fr; gap: 0.6rem; align-items: baseline; padding: 0.45rem 0.6rem; color: var(--muted); border-radius: 6px; transition: all 0.2s; font-size: 0.92rem; }
-        .sidebar-nav a:hover { color: var(--text); background: var(--accent-soft); text-decoration: none; }
-        .sidebar-nav .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.78rem; font-weight: 700; }
-        .sidebar-socials { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .sidebar-socials a { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 8px; transition: all 0.2s; }
-        .sidebar-socials a:hover { border-color: var(--accent); box-shadow: var(--accent-glow); text-decoration: none; }
-        .sidebar-socials img { width: 18px; height: 18px; filter: invert(58%) sepia(96%) saturate(2284%) hue-rotate(160deg) brightness(101%) contrast(101%); }
-        .sidebar-contact a { display: block; color: var(--text); font-size: 0.88rem; margin-bottom: 0.4rem; word-break: break-word; }
-        .sidebar-contact a:hover { color: var(--accent); text-decoration: none; }
-        .sidebar-contact .label { font-size: 0.72rem; color: var(--dim); margin-bottom: 0.15rem; }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.75rem); }
 
-        /* Hero */
-        .hero { padding: 6rem 0 4rem; }
-        .hero .tag { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; margin-bottom: 1.4rem; letter-spacing: 0.22em; text-transform: uppercase; }
-        .hero .greeting { font-size: 1.4rem; font-weight: 400; color: var(--muted); margin-bottom: 0.4rem; letter-spacing: -0.01em; }
-        .hero h1.bigname { font-size: 5rem; font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin-bottom: 0.4rem; color: var(--text); }
-        .hero .fullname { font-size: 1rem; color: var(--dim); margin-bottom: 1.6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
-        .hero .role { font-size: 1.6rem; font-weight: 600; color: var(--text); margin-bottom: 1.2rem; }
+        /* ---- top bar ---- */
+        .topbar { position: sticky; top: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem clamp(1.25rem, 4vw, 2.75rem); background: rgba(12, 11, 10, 0.72); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border); }
+        .logo { font-family: var(--display); font-size: 0.92rem; line-height: 1.25; letter-spacing: 0.01em; color: var(--text); text-decoration: none; }
+        .logo:hover { text-decoration: none; color: var(--accent); }
+        .logo span { display: block; }
+        .topdots { display: flex; gap: 0.4rem; }
+        .topdots span { width: 8px; height: 8px; border-radius: 50%; }
+        .topdots span:nth-child(1) { background: var(--accent); }
+        .topdots span:nth-child(2) { background: var(--link); }
+        .topdots span:nth-child(3) { background: var(--muted); }
+        .menu-btn { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--text);
+            background: transparent; border: 1px solid var(--border-strong); border-radius: 999px; padding: 0.5rem 1.1rem; cursor: pointer; transition: all 0.2s; }
+        .menu-btn:hover { border-color: var(--accent); color: var(--accent); }
+        @media (max-width: 640px) { .topdots { display: none; } }
+
+        /* ---- nav overlay ---- */
+        .nav-overlay { position: fixed; inset: 0; z-index: 300; background: var(--bg-deep);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 5rem 1.5rem 2rem; overflow-y: auto;
+            opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
+        body.nav-open .nav-overlay { opacity: 1; visibility: visible; transform: none; }
+        body.nav-open { overflow: hidden; }
+        .nav-list { list-style: none; text-align: center; }
+        .nav-list li { margin: 0.35rem 0; }
+        .nav-list a { display: inline-flex; align-items: baseline; gap: 0.9rem; font-family: var(--display); font-size: clamp(1.6rem, 5vw, 2.6rem);
+            color: var(--text); padding: 0.15rem 0; }
+        .nav-list a:hover { color: var(--accent); text-decoration: none; }
+        .nav-list .num { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent); }
+        .nav-foot { margin-top: 2.6rem; display: flex; flex-direction: column; align-items: center; gap: 0.9rem; }
+        .nav-socials { display: flex; gap: 0.6rem; }
+        .nav-socials a { width: 38px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border-strong); border-radius: 8px; transition: all 0.2s; }
+        .nav-socials a:hover { border-color: var(--accent); text-decoration: none; }
+        .nav-socials img { width: 18px; height: 18px; filter: invert(93%) sepia(6%) saturate(400%) hue-rotate(0deg) brightness(95%); }
+        .nav-email { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--muted); }
+        .nav-close { position: absolute; top: 1.2rem; right: clamp(1.25rem, 4vw, 2.75rem); }
+
+        /* ---- scroll progress ticks ---- */
+        .scroll-ticks { position: fixed; right: 1.4rem; bottom: 1.4rem; z-index: 150; display: flex; align-items: flex-end; gap: 2px;
+            padding: 0.5rem 0.6rem; background: rgba(23, 20, 15, 0.55); border: 1px solid var(--border); border-radius: 6px; backdrop-filter: blur(4px); }
+        .scroll-ticks .tick { width: 2px; height: 10px; background: var(--border-strong); border-radius: 1px; }
+        .scroll-ticks .tick.active { height: 16px; background: var(--accent); }
+        @media (max-width: 768px) { .scroll-ticks { display: none; } }
+
+        /* ---- hero ---- */
+        .hero { position: relative; padding: 6rem 0 5rem; overflow: hidden;
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 44px 44px; }
+        .squiggle { position: absolute; top: 10%; right: -6%; width: min(60vw, 720px); height: auto; opacity: 0.4; pointer-events: none; z-index: 0; }
+        .squiggle path { fill: none; stroke: var(--border-strong); stroke-width: 1.6; stroke-dasharray: 1600; stroke-dashoffset: 1600; animation: draw 2.6s ease-out forwards 0.25s; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+        .hero-inner { position: relative; z-index: 1; }
+        .hero .tag { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; margin-bottom: 1.6rem; letter-spacing: 0.22em; text-transform: uppercase; }
+        .hero .greeting { font-size: 1.4rem; font-weight: 400; color: var(--muted); margin-bottom: 0.3rem; letter-spacing: -0.01em; }
+        .hero h1.bigname { font-family: var(--display); font-size: clamp(3.4rem, 11vw, 7.5rem); line-height: 0.94; letter-spacing: -0.01em; margin-bottom: 0.5rem; color: var(--text); text-transform: uppercase; }
+        .hero h1.bigname .dot { color: var(--accent); }
+        .hero .fullname { font-size: 0.92rem; color: var(--dim); margin-bottom: 1.7rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; }
+        .hero .role { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1.3rem; }
         .hero .role .pipe { color: var(--accent); }
-        .hero p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 1.6rem; }
+        .hero p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 1.7rem; }
         .hero p.lead b { color: var(--text); }
-        .proof { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.8rem; }
+        .proof { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.9rem; }
         .proof span { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.35rem 0.85rem; background: var(--surface); }
         .proof span b { color: var(--accent); font-weight: 700; }
-        .typing-wrapper { margin-bottom: 1.5rem; max-width: 620px; }
+        .typing-wrapper { margin-bottom: 1.6rem; max-width: 620px; }
         .typing-text { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent); font-weight: 600; line-height: 1.6; min-height: 1.6em; }
         .typing-cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--accent); margin-left: 2px; animation: blink 1s step-end infinite; vertical-align: text-bottom; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .hero-cta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
-        .pill { padding: 0.6rem 1.3rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.88rem; color: var(--text) !important; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
+        .hero-cta { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+        .pill { padding: 0.62rem 1.35rem; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.88rem; color: var(--text) !important; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s; }
         .pill:hover { border-color: var(--accent); text-decoration: none !important; box-shadow: var(--accent-glow); transform: translateY(-1px); }
-        .pill.primary { background: var(--accent); color: var(--bg-deep) !important; border-color: var(--accent); font-weight: 600; }
-        .pill.primary:hover { box-shadow: 0 0 24px rgba(0, 212, 255, 0.5); }
+        .pill.primary { background: var(--accent); color: #fff !important; border-color: var(--accent); font-weight: 700; }
+        .pill.primary:hover { box-shadow: 0 0 26px rgba(200, 73, 46, 0.5); }
+        .scroll-cue { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 2.6rem;
+            font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; letter-spacing: 0.18em; color: var(--dim); }
+        .scroll-cue:hover { color: var(--accent); text-decoration: none; }
+        .scroll-cue .arrow { display: inline-block; animation: bob 1.6s ease-in-out infinite; }
+        @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
-        /* Section */
-        .section { padding: 4rem 0; border-top: 1px solid var(--border); }
-        .section-num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
-        .section h2 { font-size: 2rem; font-weight: 800; margin: 0.5rem 0 0.5rem; color: var(--text); letter-spacing: -0.025em; }
-        .section .subtitle { color: var(--muted); font-size: 0.96rem; margin-bottom: 2.4rem; max-width: 680px; }
+        /* ---- section shell ---- */
+        .section { position: relative; padding: 5.5rem 0; border-top: 1px solid var(--border);
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 44px 44px; }
+        .tag-badge { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong);
+            border-bottom: 2px solid var(--accent); padding: 0.4rem 0.85rem; margin-bottom: 1.2rem; }
+        .section h2 { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 400; margin: 0 0 0.6rem; color: var(--text); letter-spacing: -0.01em; text-transform: uppercase; }
+        .section .subtitle { color: var(--muted); font-size: 0.98rem; margin-bottom: 2.6rem; max-width: 680px; }
+        .accent-blue { color: var(--link); }
 
-        /* About: identity header + sliding cards */
-        .about-head { display: flex; align-items: center; gap: 1.8rem; margin-bottom: 2.2rem; flex-wrap: wrap; }
-        .about-head img { width: 230px; height: auto; border-radius: 14px; border: 1px solid var(--border-strong); box-shadow: var(--accent-glow); flex: none; }
-        .about-lead { color: var(--text); font-size: 1.08rem; line-height: 1.75; max-width: 520px; }
+        /* big outline heading (projects / contact chapters) */
+        .section h2.outline-head { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.9;
+            color: transparent; -webkit-text-stroke: 1.5px var(--border-strong); letter-spacing: -0.01em; }
+        @supports not (-webkit-text-stroke: 1px black) { .section h2.outline-head { color: var(--border-strong); -webkit-text-stroke: 0; } }
+
+        /* ---- bracket corner card ---- */
+        .bracket { position: relative; }
+        .bracket::before, .bracket::after { content: ''; position: absolute; width: 20px; height: 20px; transition: border-color 0.2s; pointer-events: none; }
+        .bracket::before { top: -1px; left: -1px; border-top: 1px solid var(--border-strong); border-left: 1px solid var(--border-strong); }
+        .bracket::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--border-strong); border-right: 1px solid var(--border-strong); }
+        .bracket:hover::before, .bracket:hover::after { border-color: var(--accent); }
+
+        /* ---- About: paper chapter ---- */
+        .section-paper {
+            --bg: var(--paper);
+            --surface: #f7f1e1;
+            --surface-2: #efe6d0;
+            --border: rgba(25, 20, 15, 0.12);
+            --border-strong: rgba(25, 20, 15, 0.26);
+            --text: var(--paper-ink);
+            --muted: #5c5344;
+            --dim: #8a7f6a;
+            --grid-line: rgba(25, 20, 15, 0.05);
+            --paper: #ece3cf; --paper-ink: #19140f;
+            background: var(--paper); color: var(--text);
+        }
+        .about-grid { display: grid; grid-template-columns: 260px 1fr; gap: 2.4rem; margin-bottom: 2.6rem; align-items: start; }
+        .about-photo { position: relative; }
+        .about-photo img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border: 1px solid var(--border-strong); filter: grayscale(0.15) contrast(1.02); box-shadow: 10px 10px 0 rgba(25,20,15,0.08); }
+        .photo-cap { margin-top: 0.7rem; font-size: 0.78rem; color: var(--dim); text-align: center; }
+        .about-lead { font-size: 1.1rem; line-height: 1.75; margin-bottom: 1.6rem; }
+        .about-timeline { display: grid; gap: 0.9rem; }
+        .tl-row { display: grid; grid-template-columns: 92px 1fr; gap: 1rem; padding: 0.7rem 0 0.7rem; border-top: 1px solid var(--border); }
+        .tl-row:first-child { border-top: none; padding-top: 0; }
+        .tl-year { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); font-weight: 700; }
+        .tl-row div b { color: var(--text); }
         .about-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
-        .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.7rem 1.5rem; transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s; }
+        .about-card { background: var(--surface); border: 1px solid var(--border); padding: 1.7rem 1.5rem; transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s; }
         .about-card:hover { box-shadow: var(--accent-glow); border-color: var(--accent); transform: translateY(-3px); }
         .about-card h3 { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 0.7rem; }
         .about-card p { font-size: 0.93rem; color: var(--text); line-height: 1.72; }
@@ -103,29 +184,31 @@
         .about-card li:first-child { border-top: none; padding-top: 0.1rem; }
         .about-card li::before { content: '▹'; color: var(--accent); position: absolute; left: 0; }
         .about-card li b { color: var(--text); font-weight: 600; }
-        /* left-to-right staggered slide, only once the reveal system marks the section in view */
         .reveal .about-card { opacity: 0; transform: translateX(-44px); }
         .reveal.in .about-card { animation: slideInLeft 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         .reveal.in .about-card:nth-child(2) { animation-delay: 0.14s; }
         .reveal.in .about-card:nth-child(3) { animation-delay: 0.28s; }
         @keyframes slideInLeft { to { opacity: 1; transform: translateX(0); } }
-        @media (max-width: 820px) { .about-track { grid-template-columns: 1fr; } .reveal .about-card { opacity: 1; transform: none; } }
+        @media (max-width: 820px) {
+            .about-track { grid-template-columns: 1fr; } .reveal .about-card { opacity: 1; transform: none; }
+            .about-grid { grid-template-columns: 1fr; } .about-photo { max-width: 220px; margin: 0 auto; }
+        }
         @media (prefers-reduced-motion: reduce) { .reveal .about-card { opacity: 1; transform: none; animation: none; } }
 
-        /* Numbered card grid (Education + OSS + Experience) */
+        /* ---- numbered card grid (Education + OSS) ---- */
         .numbered-grid { display: grid; gap: 1rem; }
-        .num-card { display: grid; grid-template-columns: 60px 1fr; gap: 1.4rem; padding: 1.7rem 1.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; }
+        .num-card { display: grid; grid-template-columns: 64px 1fr; gap: 1.4rem; padding: 1.7rem 1.9rem; background: var(--surface); border: 1px solid var(--border); transition: all 0.25s; }
         .num-card:hover { border-color: var(--border-strong); box-shadow: var(--accent-glow); transform: translateY(-2px); }
-        .num-card .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.7rem; font-weight: 700; line-height: 1; padding-top: 0.2rem; }
+        .num-card .num { font-family: var(--display); color: var(--accent); font-size: 1.9rem; line-height: 1; padding-top: 0.1rem; }
         .num-card .head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.4rem; }
         .num-card .head img { width: 40px; height: 40px; border-radius: 8px; background: var(--bg); padding: 4px; border: 1px solid var(--border-strong); }
         .num-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); }
         .num-card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.6rem; }
         .num-card p { font-size: 0.92rem; color: var(--muted); margin-bottom: 0.7rem; }
 
-        /* Experience list */
+        /* ---- experience list ---- */
         .exp-list { display: grid; gap: 1.2rem; }
-        .exp-row { display: grid; grid-template-columns: 1fr 180px; gap: 1.5rem; align-items: start; padding: 1.5rem 1.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; }
+        .exp-row { display: grid; grid-template-columns: 1fr 180px; gap: 1.5rem; align-items: start; padding: 1.5rem 1.8rem; background: var(--surface); border: 1px solid var(--border); transition: all 0.25s; }
         .exp-row:hover { border-color: var(--border-strong); box-shadow: var(--accent-glow); transform: translateY(-2px); }
         .exp-row h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
         .exp-row .company { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent); font-weight: 600; margin-bottom: 0.4rem; }
@@ -135,26 +218,26 @@
         .exp-row li::before { content: '▹'; color: var(--accent); position: absolute; left: 0; }
         .exp-row .exp-side { text-align: right; }
         .exp-row .exp-side .title { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); font-weight: 600; }
+        @media (max-width: 720px) { .exp-row { grid-template-columns: 1fr; } .exp-row .exp-side { text-align: left; } }
 
-        /* Project numbered cards */
+        /* ---- project numbered cards ---- */
         .projects-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
         @media (min-width: 1100px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
-        .project-card { padding: 1.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; display: flex; flex-direction: column; }
+        .project-card { padding: 1.8rem; background: var(--surface); border: 1px solid var(--border); transition: all 0.25s; display: flex; flex-direction: column; }
         .project-card:hover { border-color: var(--accent); box-shadow: var(--accent-glow); transform: translateY(-2px); }
-        .project-card .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+        .project-card .num { font-family: var(--display); color: var(--accent); font-size: 1.15rem; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
         .project-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
         .project-card .links { display: flex; gap: 0.6rem; font-size: 0.78rem; margin-bottom: 0.8rem; flex-wrap: wrap; }
         .project-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.8rem; flex: 1; }
         .project-card .stats { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); margin-bottom: 0.8rem; }
         .project-card .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
         .badge { padding: 0.3rem 0.75rem; background: var(--accent-soft); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 0.72rem; color: var(--accent); font-weight: 500; font-family: 'JetBrains Mono', monospace; }
-        .live-badge { padding: 0.3rem 0.75rem; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent); border-radius: 999px; font-size: 0.72rem; font-weight: 600; box-shadow: 0 0 12px rgba(0, 212, 255, 0.25); }
-        .more { grid-column: 1 / -1; margin-top: 1rem; padding: 1.6rem 1.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+        .live-badge { padding: 0.3rem 0.75rem; background: var(--link-soft); color: var(--link); border: 1px solid var(--link); border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
+        .more { grid-column: 1 / -1; margin-top: 1rem; padding: 1.6rem 1.8rem; background: var(--surface); border: 1px solid var(--border); }
         .more-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1rem; }
         .more-list { list-style: none; display: grid; gap: 0.7rem; }
         .more-list li { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
         .more-list a { font-weight: 600; }
-        /* ---- flagship + subordinate governance layer ---- */
         .project-card.flagship { grid-column: 1 / -1; border-color: var(--border-strong); background:
             linear-gradient(180deg, var(--accent-soft) 0%, var(--surface) 55%); position: relative; padding-top: 2.1rem; }
         .flag-tag { position: absolute; top: 1rem; right: 1.4rem; font-family: 'JetBrains Mono', monospace;
@@ -163,15 +246,14 @@
         .project-card.flagship h3 { font-size: 1.45rem; }
         @media (min-width: 1100px) { .project-card.flagship p { max-width: 70ch; } }
         .govlayer { grid-column: 1 / -1; margin: 0.2rem 0 0.4rem; padding: 1.5rem 1.8rem;
-            border: 1px dashed var(--border-strong); border-radius: 12px; background: var(--surface); }
+            border: 1px dashed var(--border-strong); background: var(--surface); }
         .govlayer-label { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.72rem;
             font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.35rem; }
         .govlayer-sub { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.1rem; }
         .govlayer-sub b { color: var(--text); font-weight: 600; }
         .comp-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
         @media (min-width: 720px) { .comp-grid { grid-template-columns: 1fr 1fr; } }
-        .comp-card { padding: 1.05rem 1.2rem; background: var(--bg); border: 1px solid var(--border);
-            border-radius: 9px; transition: border-color 0.2s; }
+        .comp-card { padding: 1.05rem 1.2rem; background: var(--bg); border: 1px solid var(--border); transition: border-color 0.2s; }
         .comp-card:hover { border-color: var(--accent); }
         .comp-card h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent);
             margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.5rem; }
@@ -179,17 +261,15 @@
         .comp-card .role { font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase;
             color: var(--dim); font-weight: 700; }
         .comp-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
-        /* ---- adoption / traction band ---- */
         .traction { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin: 0 0 2rem; }
         @media (min-width: 720px) { .traction { grid-template-columns: repeat(3, 1fr); } }
-        .tstat { padding: 1.35rem 1.4rem; background: var(--surface); border: 1px solid var(--border-strong);
-            border-radius: 12px; transition: border-color 0.2s, box-shadow 0.2s; }
+        .tstat { padding: 1.35rem 1.4rem; background: var(--surface); border: 1px solid var(--border-strong); transition: border-color 0.2s, box-shadow 0.2s; }
         .tstat:hover { border-color: var(--accent); box-shadow: var(--accent-glow); }
-        .tnum { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+        .tnum { font-family: var(--display); font-size: 1.9rem; color: var(--accent); line-height: 1; }
         .tlbl { font-size: 0.83rem; color: var(--muted); margin-top: 0.55rem; line-height: 1.55; }
         .tlbl b { color: var(--text); font-weight: 600; }
 
-        /* Stack with icons */
+        /* ---- stack ---- */
         .stack-group { margin-bottom: 2rem; }
         .stack-group h4 { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
         .stack-items { display: flex; flex-wrap: wrap; gap: 0.6rem; }
@@ -197,77 +277,80 @@
         .stack-item:hover { border-color: var(--accent); box-shadow: var(--accent-glow); transform: translateY(-1px); }
         .stack-item img { width: 18px; height: 18px; }
 
-        /* PRs */
+        /* ---- PRs ---- */
         .prs-grid { display: grid; gap: 0.8rem; }
-        .pr-card { display: grid; grid-template-columns: 50px 1fr; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; align-items: start; transition: all 0.2s; }
+        .pr-card { display: grid; grid-template-columns: 50px 1fr; gap: 1.2rem; padding: 1.2rem 1.5rem; background: var(--surface); border: 1px solid var(--border); align-items: start; transition: all 0.2s; }
         .pr-card:hover { border-color: var(--border-strong); box-shadow: var(--accent-glow); }
-        .pr-card .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1rem; font-weight: 700; padding-top: 0.1rem; }
+        .pr-card .num { font-family: var(--display); color: var(--accent); font-size: 1.1rem; padding-top: 0.1rem; }
         .pr-card h4 { font-size: 0.97rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; }
         .pr-card h4 a { color: var(--text); }
         .pr-card h4 a:hover { color: var(--accent); }
         .pr-card .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; }
         .pr-card p { font-size: 0.87rem; color: var(--muted); }
         .pr-card .meta .st { color: var(--accent); }
-        .pr-card .meta .st.rev { color: #e0a33a; }
+        .pr-card .meta .st.rev { color: #d99a3f; }
         .pr-review { margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.5rem; }
-        .pr-review .lbl { font-family: 'JetBrains Mono', monospace; color: #e0a33a; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1rem; }
+        .pr-review .lbl { font-family: 'JetBrains Mono', monospace; color: #d99a3f; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1rem; }
         .pr-review ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2.2rem; }
         .pr-review li { font-size: 0.86rem; color: var(--muted); line-height: 1.5; padding-left: 1.1rem; position: relative; }
-        .pr-review li::before { content: '▹'; color: #e0a33a; position: absolute; left: 0; }
+        .pr-review li::before { content: '▹'; color: #d99a3f; position: absolute; left: 0; }
         .pr-review li a { color: var(--text); font-weight: 500; }
         .pr-review li a:hover { color: var(--accent); }
         @media (max-width: 820px) { .pr-review ul { grid-template-columns: 1fr; } }
 
-        /* Activity */
+        /* ---- activity ---- */
         .activity-grid { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
         .activity-grid img { max-width: 100%; }
 
-        /* Contact */
+        /* ---- contact ---- */
         .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0 2rem; }
         @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
-        .contact-card { padding: 1.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; }
+        .contact-card { padding: 1.6rem; background: var(--surface); border: 1px solid var(--border); transition: all 0.25s; }
         .contact-card:hover { border-color: var(--border-strong); box-shadow: var(--accent-glow); }
         .contact-card h4 { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; margin-bottom: 0.6rem; }
         .contact-card a { font-size: 1.02rem; font-weight: 600; }
         .contact-card .desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
         .process { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
         @media (max-width: 768px) { .process { grid-template-columns: 1fr; } }
-        .process-step { padding: 1.6rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; transition: all 0.25s; }
+        .process-step { padding: 1.6rem; background: var(--surface); border: 1px solid var(--border); transition: all 0.25s; }
         .process-step:hover { border-color: var(--border-strong); box-shadow: var(--accent-glow); transform: translateY(-2px); }
-        .process-step .num { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.6rem; }
+        .process-step .num { font-family: var(--display); color: var(--accent); font-size: 1.5rem; margin-bottom: 0.6rem; }
         .process-step h4 { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
         .process-step p { font-size: 0.88rem; color: var(--muted); }
 
-        /* Footer */
-        .footer { padding: 3rem 0 2rem; border-top: 1px solid var(--border); margin-top: 2rem; text-align: center; }
+        .cta-heading { font-family: var(--display); font-size: clamp(2rem, 6vw, 3.8rem); line-height: 1.02; text-transform: uppercase; margin-bottom: 2.6rem; }
+        .cta-heading .line2 { color: var(--accent); }
+
+        .social-row { display: flex; flex-wrap: wrap; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 2.6rem 0 0; }
+        .social-row a { flex: 1 1 160px; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+            padding: 1.1rem 1.4rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; letter-spacing: 0.06em; color: var(--text);
+            border-right: 1px solid var(--border); transition: all 0.2s; }
+        .social-row a:last-child { border-right: none; }
+        .social-row a:hover { background: var(--surface); color: var(--accent); text-decoration: none; }
+        .social-row .si { color: var(--dim); }
+        @media (max-width: 720px) { .social-row a { border-right: none; border-bottom: 1px solid var(--border); flex: 1 1 100%; } }
+
+        /* ---- footer ---- */
+        .footer { padding: 2.4rem 0 2.2rem; border-top: 1px solid var(--border); text-align: center; }
+        .footer .tagline { font-family: 'JetBrains Mono', monospace; color: var(--dim); font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 0.9rem; }
         .footer .copy { font-family: 'JetBrains Mono', monospace; color: var(--muted); font-size: 0.85rem; margin-bottom: 0.4rem; }
         .footer .rights { color: var(--dim); font-size: 0.78rem; margin-bottom: 1rem; }
-        .footer .heart { color: var(--text); font-size: 0.92rem; margin-bottom: 0.4rem; }
-        .footer .craft { color: var(--accent); font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+        .footer .heart { color: var(--text); font-size: 0.92rem; }
 
-        /* Responsive: collapse sidebar to top nav on small screens */
-        @media (max-width: 1024px) {
-            .layout { grid-template-columns: 1fr; }
-            .sidebar { position: relative; height: auto; padding: 1.5rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border); }
-            .sidebar-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.4rem; }
-            .container { padding: 0 1.5rem; }
-            .hero h1.bigname { font-size: 3.5rem; }
-        }
         @media (max-width: 640px) {
-            .hero h1.bigname { font-size: 2.6rem; }
+            .hero h1.bigname { font-size: clamp(2.6rem, 15vw, 4rem); }
             .hero .role { font-size: 1.2rem; }
         }
 
-        /* Static page: no scroll animation. Content is always visible. */
         /* ---- interactive governed pipeline (ported from the concept) ---- */
-        .gq { border: 1px solid var(--border-strong); border-radius: 12px; background: var(--surface); overflow: hidden; margin-bottom: 1.4rem; }
+        .gq { border: 1px solid var(--border-strong); background: var(--surface); overflow: hidden; margin-bottom: 1.4rem; }
         .gq-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
         .gq-title { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--dim); display: flex; align-items: center; gap: 0.5rem; }
         .gq-title .dot { width: 0.55rem; height: 0.55rem; border-radius: 50%; border: 1px solid var(--border-strong); }
         .gq-controls { display: flex; gap: 0.4rem; }
         .gqbtn { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: var(--text); background: var(--bg-deep); border: 1px solid var(--border-strong); border-radius: 6px; padding: 0.4rem 0.8rem; cursor: pointer; transition: all 0.15s; }
-        .gqbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px rgba(0,212,255,0.3); }
-        .gqbtn.pii:hover:not(:disabled) { border-color: var(--refuse); color: var(--refuse); box-shadow: none; }
+        .gqbtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .gqbtn.pii:hover:not(:disabled) { border-color: var(--refuse); color: var(--refuse); }
         .gqbtn:disabled { opacity: 0.4; cursor: default; }
         .gqbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         .gq-flow { position: relative; padding: 0.5rem 1rem 0.6rem; }
@@ -312,6 +395,8 @@
         .chainmini-hint { font-size: 0.8rem; color: var(--dim); margin-bottom: 0.8rem; }
         @media (prefers-reduced-motion: reduce) {
             .packet, .stage .marker, .stage .detail, .stage .schip, .blk, .pglyph { transition: none !important; }
+            .squiggle path { animation: none; stroke-dashoffset: 0; }
+            .scroll-cue .arrow { animation: none; }
         }
         @media (max-width: 620px) {
             .stage { grid-template-columns: 2.6rem 4.2rem 1fr auto; gap: 0.2rem 0.5rem; }
@@ -319,96 +404,65 @@
             .rail { left: calc(2.2rem - 1px); }
             .packet { left: calc(2.2rem - 6px); }
         }
-        /* Animated background: mouse-follow glow + floating shapes */
-        .bg-mouse { position: fixed; inset: 0; pointer-events: none; z-index: 0;
-            background:
-                radial-gradient(circle at calc(var(--mx, 50%)) calc(var(--my, 50%)), rgba(0, 212, 255, 0.10) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(120, 80, 255, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 60% 90%, rgba(0, 180, 220, 0.05) 0%, transparent 50%);
-            animation: pulse 6s ease-in-out infinite;
-        }
-        .particle-layer { position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-        .particle { position: absolute; box-shadow: 0 0 14px rgba(0, 212, 255, 0.10); }
-        .particle-emoji { position: absolute; opacity: 0.22; filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.25)); }
-        .particle-geo { position: absolute; }
-        .layout, footer { position: relative; z-index: 2; }
-        .sidebar { z-index: 3; }
-        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.7; } }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
-            25% { transform: translateY(-24px) translateX(12px) rotate(90deg); }
-            50% { transform: translateY(0) translateX(-8px) rotate(180deg); }
-            75% { transform: translateY(12px) translateX(-12px) rotate(270deg); }
-        }
-        @keyframes float-soft {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.22; }
-            50% { transform: translateY(-16px) translateX(8px); opacity: 0.35; }
-        }
+
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .reveal.in { opacity: 1; transform: translateY(0); }
         @media (prefers-reduced-motion: reduce) {
-            .particle, .particle-emoji, .particle-geo { animation: none !important; opacity: 0.12 !important; }
-            .bg-mouse { animation: none !important; }
             .reveal { transition: none; opacity: 1; transform: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="bg-mouse" aria-hidden="true"></div>
-<div class="particle-layer" aria-hidden="true" id="particles"></div>
+<div class="grain" aria-hidden="true"></div>
 
-<div class="layout">
+<header class="topbar">
+    <a href="#home" class="logo"><span>pawan</span><span>kapkoti</span></a>
+    <div class="topdots" aria-hidden="true"><span></span><span></span><span></span></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navOverlay">[ MENU ]</button>
+</header>
 
-<aside class="sidebar">
-    <div class="sidebar-logo">~/pawan</div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-label">Navigate</div>
-        <nav class="sidebar-nav">
-            <a href="#home"><span class="num">01</span> Home</a>
-            <a href="#about"><span class="num">02</span> About Me</a>
-            <a href="#experience"><span class="num">03</span> Experience</a>
-            <a href="#education"><span class="num">04</span> Education</a>
-            <a href="#projects"><span class="num">05</span> Projects</a>
-            <a href="#stack"><span class="num">06</span> Stack</a>
-            <a href="#oss"><span class="num">07</span> Open Source</a>
-            <a href="#prs"><span class="num">08</span> Notable PRs</a>
-            <a href="#contact"><span class="num">09</span> Contact</a>
-        </nav>
-    </div>
-
-    <div class="sidebar-section">
-        <div class="sidebar-label">Socials</div>
-        <div class="sidebar-socials">
+<nav class="nav-overlay" id="navOverlay" aria-hidden="true">
+    <button class="menu-btn nav-close" id="menuCloseBtn" type="button">[ CLOSE ]</button>
+    <ul class="nav-list">
+        <li><a href="#home"><span class="num">01</span> Home</a></li>
+        <li><a href="#about"><span class="num">02</span> About Me</a></li>
+        <li><a href="#experience"><span class="num">03</span> Experience</a></li>
+        <li><a href="#education"><span class="num">04</span> Education</a></li>
+        <li><a href="#projects"><span class="num">05</span> Projects</a></li>
+        <li><a href="#stack"><span class="num">06</span> Stack</a></li>
+        <li><a href="#oss"><span class="num">07</span> Open Source</a></li>
+        <li><a href="#prs"><span class="num">08</span> Notable PRs</a></li>
+        <li><a href="#contact"><span class="num">09</span> Contact</a></li>
+    </ul>
+    <div class="nav-foot">
+        <div class="nav-socials">
             <a href="https://github.com/Pawansingh3889" title="GitHub"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" alt="GitHub"/></a>
             <a href="https://www.linkedin.com/in/pawan-singh-kapkoti-100176347" title="LinkedIn"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" alt="LinkedIn"/></a>
             <a href="https://pypi.org/user/pawansingh3889/" title="PyPI"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/pypi.svg" alt="PyPI"/></a>
             <a href="https://huggingface.co/pawankapkoti" title="Hugging Face"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/huggingface.svg" alt="Hugging Face"/></a>
             <a href="https://discord.gg/gBr77yYPkD" title="Discord"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg" alt="Discord"/></a>
         </div>
+        <a class="nav-email" href="mailto:pawankapkoti3889@gmail.com">pawankapkoti3889@gmail.com</a>
     </div>
+</nav>
 
-    <div class="sidebar-section sidebar-contact">
-        <div class="sidebar-label">Contact</div>
-        <div class="label">Email</div>
-        <a href="mailto:pawankapkoti3889@gmail.com">pawankapkoti3889@gmail.com</a>
-        <div class="label" style="margin-top: 0.7rem;">Location</div>
-        <div style="font-size: 0.88rem; color: var(--text);">Greater Noida, Delhi NCR, India</div>
-    </div>
-</aside>
+<div class="scroll-ticks" id="scrollTicks" aria-hidden="true"></div>
 
 <main class="main">
 
 <section id="home" class="hero">
-    <div class="container">
+    <svg class="squiggle" viewBox="0 0 800 500" aria-hidden="true">
+        <path d="M-20,360 C120,300 160,180 270,210 C380,240 330,360 440,380 C560,405 500,220 630,140 C710,92 770,60 830,10"/>
+        <path d="M-20,120 C90,150 140,60 250,80 C360,100 340,200 460,190" opacity="0.6"/>
+    </svg>
+    <div class="container hero-inner">
         <div class="tag">// HELLO WORLD</div>
         <div class="greeting">Hi, I'm</div>
-        <h1 class="bigname">PAWAN</h1>
+        <h1 class="bigname">PAWAN<span class="dot">.</span></h1>
         <div class="fullname">~/import pawan_singh_kapkoti</div>
         <div class="role">Data Engineer<span class="pipe">|</span></div>
-        <p class="lead">I build the data platform and the governance layer that makes it safe to point an AI agent at a real database: on-prem pipelines, a semantic layer that compiles every query, and a tamper-evident record of what the agent did. It's open source, and other people use it. Thousands of installs, and outside developers merging rules into the code. Based in Greater Noida, Delhi NCR. By day, an AI/ML engineer at Copernus shipping governed AI inside a BRC-audited plant. Compliance shouldn't mean spreadsheets, and AI shouldn't require the cloud.</p>
+        <p class="lead">I build the data platform and the governance layer that makes it safe to point an AI agent at a real database: on-prem pipelines, a semantic layer that compiles every query, and a tamper-evident record of what the agent did. It's open source, and other people use it. Thousands of installs, and outside developers merging rules into the code. Based in Greater Noida West, Delhi NCR. Most recently a Data Analytics Team Lead at Copernus, shipping governed AI inside a BRC-audited plant. Compliance shouldn't mean spreadsheets, and AI shouldn't require the cloud.</p>
         <div class="proof">
             <span>On-prem, <b>no cloud, no API keys</b></span>
             <span>Semantic-layer <b>governed SQL</b></span>
@@ -425,18 +479,29 @@
             <a href="https://drive.google.com/file/d/1wEDlamry-sl0mYrE4tbxitZaHy-s7jSX/view" class="pill" id="cvPill" target="_blank" rel="noopener noreferrer">Download CV</a>
             <a href="https://pypi.org/user/pawansingh3889/" class="pill">PyPI</a>
         </div>
+        <a href="#about" class="scroll-cue">MEET PAWAN <span class="arrow">↓</span></a>
     </div>
 </section>
 
-<section id="about" class="section">
+<section id="about" class="section section-paper">
     <div class="container">
-        <div class="section-num">// 02 ABOUT</div>
-        <h2>About Me</h2>
-        <p class="subtitle">AI/ML Engineer @ Copernus · MSc Data Analytics · OSS maintainer</p>
+        <div class="tag-badge">02 / About Me</div>
+        <h2>Hello! I'm <span class="accent-blue">Pawan Kapkoti.</span></h2>
+        <p class="subtitle">Data Analytics Team Lead @ Copernus (through Jul 2026) · MSc Data Analytics · OSS maintainer</p>
 
-        <div class="about-head">
-            <img src="me.jpg" alt="Pawan Singh Kapkoti" loading="lazy"/>
-            <p class="about-lead">AI/ML engineer at Copernus, building governed data and AI systems for a BRC-audited manufacturing plant. Governance tooling for SQL and AI agents, built in the open and runnable on-prem.</p>
+        <div class="about-grid">
+            <div class="about-photo">
+                <img src="me.jpg" alt="Pawan Singh Kapkoti" loading="lazy"/>
+                <div class="photo-cap">building governed systems, out in the open</div>
+            </div>
+            <div>
+                <p class="about-lead">Most recently a Data Analytics Team Lead at Copernus, building governed data and AI systems for a BRC-audited manufacturing plant. Governance tooling for SQL and AI agents, built in the open and runnable on-prem.</p>
+                <div class="about-timeline">
+                    <div class="tl-row"><span class="tl-year">2025 – 26</span><div><b>Data Analytics Team Lead</b> — Copernus, governed AI inside a BRC-audited plant</div></div>
+                    <div class="tl-row"><span class="tl-year">2024 – 25</span><div><b>Data Engineer</b> — freelance contracts, UK &amp; India</div></div>
+                    <div class="tl-row"><span class="tl-year">2023 – 24</span><div><b>MSc Data Analytics</b> — Aston University, Birmingham</div></div>
+                </div>
+            </div>
         </div>
 
         <div class="about-track">
@@ -472,29 +537,29 @@
 
 <section id="experience" class="section">
     <div class="container">
-        <div class="section-num">// 03 EXPERIENCE</div>
+        <div class="tag-badge">03 / Experience</div>
         <h2>Work History</h2>
         <p class="subtitle">The paid work behind the open-source one — the domain problems that shaped the tools.</p>
 
         <div class="exp-list">
-            <div class="exp-row">
+            <div class="exp-row bracket">
                 <div>
                     <div class="company">Copernus</div>
-                    <h3>AI/ML Engineer</h3>
-                    <div class="meta">Greater Noida, Delhi NCR, India · 2025 – present</div>
+                    <h3>Data Analytics Team Lead</h3>
+                    <div class="meta">Greater Noida West, Delhi NCR, India · Apr 2025 – Jul 2026</div>
                     <ul>
-                        <li>Ship governed AI inside a BRC-audited manufacturing plant — on-prem, no cloud, no API keys, auditable end to end.</li>
-                        <li>Build the semantic layer and governance stack that lets an agent query real production data without writing SQL and without touching PII it shouldn't.</li>
-                        <li>Own the data pipeline from ERP systems into dbt marts, with SLO monitoring and reproducible, hash-chained agent audit.</li>
+                        <li>Shipped governed AI inside a BRC-audited manufacturing plant — on-prem, no cloud, no API keys, auditable end to end.</li>
+                        <li>Built the semantic layer and governance stack that let an agent query real production data without writing SQL and without touching PII it shouldn't.</li>
+                        <li>Owned the data pipeline from ERP systems into dbt marts, with SLO monitoring and reproducible, hash-chained agent audit.</li>
                     </ul>
                 </div>
                 <div class="exp-side">
-                    <div class="title">Current role</div>
+                    <div class="title">Most recent role</div>
                     <div style="font-size:0.78rem;color:var(--dim);margin-top:0.3rem;">On-prem · governed AI</div>
                 </div>
             </div>
 
-            <div class="exp-row">
+            <div class="exp-row bracket">
                 <div>
                     <div class="company">Various — data &amp; analytics contracts</div>
                     <h3>Data Engineer</h3>
@@ -516,12 +581,12 @@
 
 <section id="education" class="section">
     <div class="container">
-        <div class="section-num">// 04 EDUCATION & CERTS</div>
+        <div class="tag-badge">04 / Education &amp; Certs</div>
         <h2>Academic Background</h2>
         <p class="subtitle">Data analytics formal study plus the certifications that mattered for the day job.</p>
 
         <div class="numbered-grid">
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">01</div>
                 <div>
                     <div class="head">
@@ -532,18 +597,18 @@
                     <p>Coursework across statistical learning, big-data processing (Spark), and database systems, with a research dissertation applying machine learning (Random Forest) to the effects of ethnicity on student behaviour and outcomes.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">02</div>
                 <div>
                     <div class="head">
                         <img src="https://www.google.com/s2/favicons?domain=amity.edu&sz=64" alt="Amity University"/>
-                        <h3>BCA — Artificial Intelligence and Machine Learning</h3>
+                        <h3>BCA — Computer Applications</h3>
                     </div>
                     <div class="meta">Amity University · Noida, India · 2019 – 2022</div>
                     <p>Algorithms, OOP, RDBMS, software engineering. Final-year project: a client-server inventory tracker with a JSP front and MySQL back.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">03</div>
                 <div>
                     <div class="head">
@@ -554,7 +619,7 @@
                     <p>Modelling, DAX, Power Query M, time intelligence, Import vs DirectQuery. Used daily for the manufacturing reporting layer.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">04</div>
                 <div>
                     <div class="head">
@@ -571,20 +636,20 @@
 
 <section id="projects" class="section">
     <div class="container">
-        <div class="section-num">// 05 PROJECTS</div>
-        <h2>Projects</h2>
+        <div class="tag-badge">05 / Projects</div>
+        <h2 class="outline-head" style="font-size: clamp(2.6rem, 9vw, 5.5rem); margin-bottom: 0.4rem;">Projects.</h2>
         <p class="subtitle">What I've shipped, and the adoption it has picked up.</p>
 
         <div class="traction">
-            <div class="tstat">
-                <div class="tnum">2,000+</div>
-                <div class="tlbl">installs of <a href="https://github.com/Pawansingh3889/sql-sop"><b>sql-sop</b></a> on PyPI, my rule-based SQL linter.</div>
+            <div class="tstat bracket">
+                <div class="tnum">2,800+</div>
+                <div class="tlbl">installs of <a href="https://github.com/Pawansingh3889/sql-sop"><b>sql-sop</b></a> on PyPI (mirrors excluded), my rule-based SQL linter.</div>
             </div>
-            <div class="tstat">
+            <div class="tstat bracket">
                 <div class="tnum">3</div>
                 <div class="tlbl"><b>outside developers</b> have <a href="https://github.com/Pawansingh3889/sql-sop/pulls?q=is%3Apr+is%3Amerged+-author%3APawansingh3889">merged 9 lint rules</a> into it, six from <a href="https://github.com/mvanhorn">@mvanhorn</a> alone.</div>
             </div>
-            <div class="tstat">
+            <div class="tstat bracket">
                 <div class="tnum">MCP</div>
                 <div class="tlbl"><a href="https://github.com/Pawansingh3889/sql-steward"><b>sql-steward</b></a> accepted into the official Model Context Protocol registry.</div>
             </div>
@@ -613,7 +678,7 @@
 
         <div class="projects-grid">
 
-            <div class="project-card flagship">
+            <div class="project-card flagship bracket">
                 <div class="flag-tag">FLAGSHIP</div>
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="9" cy="12" r="2.6"/><circle cx="9" cy="22" r="2.6"/><circle cx="9" cy="32" r="2.6"/><path d="M12 12 L21 22 M12 22 L21 22 M12 32 L21 22"/><rect class="hl" x="22" y="15.5" width="15" height="13" rx="2"/><path class="hl" d="M25 22 h9"/></svg><span class="num">_01</span></div>
                 <h3>sql-steward</h3>
@@ -625,7 +690,7 @@
                 </div>
             </div>
 
-            <div class="govlayer">
+            <div class="govlayer bracket">
                 <div class="govlayer-label">// The governance layer</div>
                 <p class="govlayer-sub">Four small, on-prem tools that plug into <b>sql-steward</b> — each does one job, each ships on PyPI, none needs the cloud.</p>
                 <div class="comp-grid">
@@ -655,7 +720,7 @@
                 </div>
             </div>
 
-            <div class="govlayer">
+            <div class="govlayer bracket">
                 <div class="govlayer-label">// The payments line</div>
                 <p class="govlayer-sub">The same argument as the governance layer, moved to money: an agent should not be trusted with a payment rail just because it can reach one. Three tools, each public.</p>
                 <div class="comp-grid">
@@ -674,7 +739,7 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card bracket">
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><ellipse cx="11" cy="12" rx="5" ry="2.2"/><path d="M6 12 v8 a5 2.2 0 0 0 10 0 v-8"/><path d="M18 22 h6"/><rect x="25" y="10" width="6" height="6" rx="1" class="hl"/><rect x="25" y="19" width="6" height="6" rx="1" class="hl"/><rect x="34" y="14.5" width="6" height="6" rx="1" class="hl"/></svg><span class="num">_02</span></div>
                 <h3>UK Crime Pipeline</h3>
                 <div class="links"><a href="https://github.com/Pawansingh3889/uk-crime-pipeline">Code</a> · <a href="https://uk-crime-pipeline-6nydeza7je8kiwsfl6deuw.streamlit.app/">Live</a></div>
@@ -685,18 +750,18 @@
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card bracket">
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M9 30 a13 13 0 0 1 26 0"/><path class="hl" d="M22 30 L30 21"/><circle cx="22" cy="30" r="1.6" fill="currentColor" stroke="none"/></svg><span class="num">_03</span></div>
                 <h3>Manufacturing Compliance Dashboard</h3>
-                <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a> · <a href="https://manufacturing-compliance-dashboard-mjappkncanejzlfr5ngghik.streamlit.app">Live</a></div>
+                <div class="links"><a href="https://github.com/Pawansingh3889/manufacturing-compliance-dashboard">Code</a></div>
                 <p>BRC/HACCP food safety compliance. MCP server exposes 5 compliance tools for LLM agents. NL query interface for auditors. SLO monitoring (temp 95%, traceability 90%), z-score anomaly detection, PDF audit reports. Four Golden Signals <code>/metrics</code> endpoint.</p>
                 <div class="stats">MCP server · NL query · /metrics · SLO monitoring</div>
                 <div class="badges">
-                    <span class="live-badge">Live</span><span class="badge">Streamlit</span><span class="badge">FastMCP</span><span class="badge">FastAPI</span><span class="badge">PySpark</span><span class="badge">Plotly</span>
+                    <span class="badge">Streamlit</span><span class="badge">FastMCP</span><span class="badge">FastAPI</span><span class="badge">PySpark</span><span class="badge">Plotly</span>
                 </div>
             </div>
 
-            <div class="project-card">
+            <div class="project-card bracket">
                 <div class="pcard-top"><svg class="pglyph" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect class="hl" x="8" y="10" width="13" height="10" rx="1.5"/><rect class="hl" x="23" y="10" width="13" height="10" rx="1.5"/><path d="M8 26 a6 6 0 0 0 12 0"/><path d="M14.5 32 v-6"/><rect class="hl" x="25" y="24" width="11" height="8" rx="1.5"/><path d="M30.5 21 v3"/></svg><span class="num">_04</span></div>
                 <h3>Governed Agent Stack</h3>
                 <div class="links"><a href="https://github.com/govern-agents/governed-agent-stack">Code</a></div>
@@ -707,13 +772,13 @@
                 </div>
             </div>
 
-            <div class="more">
+            <div class="more bracket">
                 <div class="more-label">More on GitHub &amp; PyPI</div>
                 <ul class="more-list">
                     <li><a href="https://github.com/Pawansingh3889/sql-explorer-mcp">sql-explorer-mcp</a> — read-only MCP server for SQL Server, Postgres and SQLite behind a three-layer safety stack (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/pr-sop">pr-sop</a> — PR governance checks (changelog drift, version consistency) as a CLI or GitHub Action (PyPI)</li>
                     <li><a href="https://github.com/Pawansingh3889/morning-brief">morning-brief</a> — rule-based Gmail triage, zero LLM, read-only OAuth (PyPI)</li>
-                    <li><a href="https://hackathon-ioqp.onrender.com">MediAsk</a> — hackathon health Q&amp;A app: NHS-verified guidance, 18 languages, voice input</li>
+                    <li><a href="https://github.com/Pawansingh3889/Hackathon-mediask">MediAsk</a> — hackathon health Q&amp;A app: NHS-verified guidance, 18 languages, voice input</li>
                 </ul>
             </div>
 
@@ -723,7 +788,7 @@
 
 <section id="stack" class="section">
     <div class="container">
-        <div class="section-num">// 06 STACK</div>
+        <div class="tag-badge">06 / Stack</div>
         <h2>My Stack</h2>
         <p class="subtitle">Tools I reach for daily, grouped by what they're for.</p>
 
@@ -802,23 +867,23 @@
 
 <section id="oss" class="section">
     <div class="container">
-        <div class="section-num">// 07 OPEN SOURCE</div>
+        <div class="tag-badge">07 / Open Source</div>
         <h2>Open Source Contributions</h2>
         <p class="subtitle">Maintainer or substantive contributor — not just docs typo fixes.</p>
 
         <div class="numbered-grid">
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">01</div>
                 <div>
                     <div class="head">
                         <img src="https://www.google.com/s2/favicons?domain=github.com/drt-hub&sz=64" alt=""/>
                         <h3>drt-hub/drt</h3>
                     </div>
-                    <div class="meta">Collaborator — 32 merged PRs across destinations, --threads, --quiet, json_columns review</div>
-                    <p>Collaborator on the multi-source data sync engine across three releases. v0.5: destination connectors including <a href="https://github.com/drt-hub/drt/pull/608">Mixpanel</a> and the official <a href="https://github.com/drt-hub/drt/pull/332">connector tutorial</a>. v0.6: <a href="https://github.com/drt-hub/drt/pull/335"><code>--threads N</code></a> parallel orchestration with a thread-safe StateManager and 11 parallel-dispatch tests. v0.7: <a href="https://github.com/drt-hub/drt/pull/408"><code>--quiet</code></a> for CI/cron use cases. Plus reviewer voice on the json_columns config PR where the early-validation suggestion shaped the final implementation.</p>
+                    <div class="meta">Collaborator — 36 merged PRs across destinations, --threads, --quiet, the serve delivery contract, and a watermark race fix</div>
+                    <p>Collaborator on the multi-source data sync engine across three releases. v0.5: destination connectors including <a href="https://github.com/drt-hub/drt/pull/608">Mixpanel</a> and the official <a href="https://github.com/drt-hub/drt/pull/332">connector tutorial</a>. v0.6: <a href="https://github.com/drt-hub/drt/pull/335"><code>--threads N</code></a> parallel orchestration with a thread-safe StateManager and 11 parallel-dispatch tests. v0.7: <a href="https://github.com/drt-hub/drt/pull/408"><code>--quiet</code></a> for CI/cron use cases. Since then: <a href="https://github.com/drt-hub/drt/pull/902">the <code>drt serve</code> delivery contract</a> (coalescing, 202 + run id, pluggable auth) and <a href="https://github.com/drt-hub/drt/pull/935">a generation-precondition fix</a> for a watermark race that silently dropped a sync's progress. Plus reviewer voice on the json_columns config PR where the early-validation suggestion shaped the final implementation.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">02</div>
                 <div>
                     <div class="head">
@@ -826,10 +891,10 @@
                         <h3>sql-sop</h3>
                     </div>
                     <div class="meta">Maintainer — review queue, releases, contributor funnel</div>
-                    <p>Three outside contributors have merged nine lint rules into it. Six came from <a href="https://github.com/mvanhorn">@mvanhorn</a> (<a href="https://github.com/Pawansingh3889/sql-sop/pull/29">W019</a>, W016, W015, W023, W021, W012), with <a href="https://github.com/Pawansingh3889/sql-sop/pull/12">W011</a> and <a href="https://github.com/Pawansingh3889/sql-sop/pull/25">P005</a> from @tmchow and the <a href="https://github.com/Pawansingh3889/sql-sop/pull/21">OVER() window check</a> from @Prabhu-1409. I run the review queue, publish to PyPI via Trusted Publishing (2,000+ installs, mirrors excluded), maintain the security and governance policy, and keep a public ROADMAP plus a one-file scaffold so a new contributor can add a rule without touching the core.</p>
+                    <p>Three outside contributors have merged nine lint rules into it. Six came from <a href="https://github.com/mvanhorn">@mvanhorn</a> (<a href="https://github.com/Pawansingh3889/sql-sop/pull/29">W019</a>, W016, W015, W023, W021, W012), with <a href="https://github.com/Pawansingh3889/sql-sop/pull/12">W011</a> and <a href="https://github.com/Pawansingh3889/sql-sop/pull/25">P005</a> from @tmchow and the <a href="https://github.com/Pawansingh3889/sql-sop/pull/21">OVER() window check</a> from @Prabhu-1409. I run the review queue, publish to PyPI via Trusted Publishing (2,800+ installs, mirrors excluded), maintain the security and governance policy, and keep a public ROADMAP plus a one-file scaffold so a new contributor can add a rule without touching the core.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">03</div>
                 <div>
                     <div class="head">
@@ -840,7 +905,7 @@
                     <p>Shipped v0.1.0, v0.1.1 (third-party rev: pin false-positive fix), and v0.1.2 (CI-merge-commit tag lookup fix) to PyPI in 24 hours. Full governance, security, contributing, and code-of-conduct documents published.</p>
                 </div>
             </div>
-            <div class="num-card">
+            <div class="num-card bracket">
                 <div class="num">04</div>
                 <div>
                     <div class="head">
@@ -857,52 +922,79 @@
 
 <section id="prs" class="section">
     <div class="container">
-        <div class="section-num">// 08 NOTABLE PRS</div>
+        <div class="tag-badge">08 / Notable PRs</div>
         <h2>Signature Upstream Pull Requests</h2>
         <p class="subtitle">Merged fixes and features in the SQL, data and AI tools I use every day.</p>
 
         <div class="prs-grid">
-            <div class="pr-card"><div class="num">01</div><div>
+            <div class="pr-card bracket"><div class="num">01</div><div>
                 <h4><a href="https://github.com/tobymao/sqlglot/pull/7824">tobymao/sqlglot#7824</a></h4>
                 <div class="meta">Fix(presto): preserve SHA256/SHA512 digest semantics · <span class="st">merged</span></div>
                 <p>Presto/Trino mapped native SHA256/512 to the string-hash expression, silently changing hash values in transpilation. Traced the root cause into the transpiler that underpins dbt and SQLMesh, mirrored the existing MD5 handling, and it merged the next morning.</p>
             </div></div>
-            <div class="pr-card"><div class="num">02</div><div>
+            <div class="pr-card bracket"><div class="num">02</div><div>
                 <h4><a href="https://github.com/apache/superset/pull/39118">apache/superset#39118</a></h4>
                 <div class="meta">refactor(dashboard): download-permission rename · <span class="st">merged</span></div>
                 <p>Aligned the dashboard download permission with the explore path. Refined to a single-responsibility change after maintainer review, then merged into Apache Superset.</p>
             </div></div>
-            <div class="pr-card"><div class="num">03</div><div>
+            <div class="pr-card bracket"><div class="num">03</div><div>
                 <h4><a href="https://github.com/sqlfluff/sqlfluff/pull/8088">sqlfluff/sqlfluff#8088</a></h4>
                 <div class="meta">TSQL: restore single-quote normalization · <span class="st">merged</span></div>
                 <p>A reported linter false-positive on quoted T-SQL aliases turned out to be a dialect-level bug: the patched <code>single_quote</code> lexer had dropped normalization for every single-quoted token. Fixed at the root with a regression test; all 545 dialect fixtures pass unregenerated.</p>
             </div></div>
-            <div class="pr-card"><div class="num">04</div><div>
+            <div class="pr-card bracket"><div class="num">04</div><div>
                 <h4><a href="https://github.com/drt-hub/drt/pull/668">drt-hub/drt#668</a> <span style="color:var(--muted);font-size:0.85rem;">(+ #608, #678)</span></h4>
                 <div class="meta">feat: sync.mask PII masking · Mixpanel destination · <span class="st">merged</span></div>
                 <p>Collaborator across releases. Shipped <code>sync.mask</code> (hash / redact / truncate PII before load) as a pure transform at the field-mapping seam, plus the Mixpanel destination connector and the official connector tutorial.</p>
             </div></div>
-            <div class="pr-card"><div class="num">05</div><div>
+            <div class="pr-card bracket"><div class="num">05</div><div>
                 <h4><a href="https://github.com/tobymao/sqlglot/pull/7832">tobymao/sqlglot#7832</a></h4>
                 <div class="meta">Fix(bigquery): SHA512 → SHA2Digest · <span class="st">merged</span></div>
                 <p>Follow-up to #7824, opened at the maintainer's invitation: mapped BigQuery's native SHA512 to the digest expression and gave Presto/Trino a type-aware encode, keeping byte-for-byte hash semantics across six dialects.</p>
             </div></div>
-            <div class="pr-card"><div class="num">06</div><div>
+            <div class="pr-card bracket"><div class="num">06</div><div>
                 <h4><a href="https://github.com/openfoodfacts/openfoodfacts-server/pull/13892">openfoodfacts/openfoodfacts-server#13892</a></h4>
                 <div class="meta">taxonomy: add "groundnut" to peanut allergens · <span class="st">merged</span></div>
                 <p>A one-line fix to a safety-critical open dataset used worldwide: "groundnut", the standard UK and Indian term, was missing from the peanut allergen synonyms, so allergen cross-checks could silently miss it.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">07</div><div>
+                <h4><a href="https://github.com/apache/superset/pull/41799">apache/superset#41799</a></h4>
+                <div class="meta">feat(dashboard): respect GranularExportControls for downloads · <span class="st">merged</span></div>
+                <p>Follow-up to #39118, opened at the maintainers' request so the permission change could be discussed on its own: made the dashboard's download switch respect <code>GranularExportControls</code> instead of collapsing every combination of <code>can_csv</code> and <code>can_export_data</code> into one flag.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">08</div><div>
+                <h4><a href="https://github.com/SQLMesh/sqlmesh/pull/5888">SQLMesh/sqlmesh#5888</a></h4>
+                <div class="meta">Fix: hex-string surrogate keys for SHA256/512 on Presto/Trino · <span class="st">merged</span></div>
+                <p>The same class of bug as the sqlglot fixes above, found while working on those: <code>generate_surrogate_key</code> mirrored MD5's hex-string conversion for every engine except Presto and Trino, so SHA256/SHA512 hit a type error at execution time on Trino and returned a binary digest, not a hex string, elsewhere.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">09</div><div>
+                <h4><a href="https://github.com/tconbeer/textual-fastdatatable/pull/154">tconbeer/textual-fastdatatable#154</a></h4>
+                <div class="meta">Fix: escape and truncate bytes values in the cell formatter · <span class="st">merged</span></div>
+                <p>Reported as a crash further upstream in <code>harlequin</code>: varbinary columns arrive as Python bytes, and with no bytes branch in the cell formatter they fell through to <code>str(obj)</code>, so a byte sequence could reach Rich's markup parser as an unmatched tag and raise <code>MarkupError</code>. Added a bytes/bytearray/memoryview branch that renders an escaped, truncated preview instead.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">10</div><div>
+                <h4><a href="https://github.com/drt-hub/drt/pull/902">drt-hub/drt#902</a></h4>
+                <div class="meta">feat: <code>drt serve</code> delivery contract — coalescing, 202 + run id, pluggable auth · <span class="st">merged</span></div>
+                <p>ADR 0004 Tier 3: hardened the serve endpoint into an explicit contract — a trigger accepted with 202 always runs, different syncs run concurrently, and the old global lock only serializes same-sync overlap.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">11</div><div>
+                <h4><a href="https://github.com/drt-hub/drt/pull/935">drt-hub/drt#935</a></h4>
+                <div class="meta">fix(state): guard GCS watermark writes with a generation precondition · <span class="st">merged</span></div>
+                <p>Two overlapping saves to the same watermark blob both read the same base object, so the later upload won outright and silently dropped the other sync's watermark — which then resumed from a stale cursor and re-processed rows it had already synced. Added a generation precondition so a stale write is rejected instead of silently lost.</p>
+            </div></div>
+            <div class="pr-card bracket"><div class="num">12</div><div>
+                <h4><a href="https://github.com/dbt-checkpoint/dbt-checkpoint/pull/351">dbt-checkpoint/dbt-checkpoint#351</a> <span style="color:var(--muted);font-size:0.85rem;">(+ #354)</span></h4>
+                <div class="meta">Fix IS NOT DISTINCT FROM / TABLE() / JSON_TABLE() false positives · <span class="st">merged</span></div>
+                <p><code>check-script-has-no-table-name</code> flagged the column after <code>FROM</code> in an <code>IS NOT DISTINCT FROM</code> comparison as a hardcoded table (#351), then flagged the function name in <code>JOIN TABLE(...)</code> and <code>CROSS JOIN JSON_TABLE(...)</code> the same way (#354) — the same false-positive family, two more paths deep, closed out in two follow-up PRs.</p>
             </div></div>
         </div>
 
         <div class="pr-review">
             <div class="lbl">// Open, in review</div>
             <ul>
-                <li><a href="https://github.com/SQLMesh/sqlmesh/pull/5888">SQLMesh · #5888</a> — hex-string surrogate keys for SHA256/512 on Presto/Trino</li>
                 <li><a href="https://github.com/getsops/sops/pull/2262">sops · #2262</a> — stop requiring a matching creation rule when a key is given explicitly</li>
                 <li><a href="https://github.com/dlt-hub/dlt/pull/4026">dlt · #4026</a> — resolve GCP service-account against oauth credentials correctly</li>
                 <li><a href="https://github.com/octopus-energy/tentaclio/pull/243">Octopus Energy · tentaclio#243</a> — expand <code>~</code> in the credentials file path</li>
-                <li><a href="https://github.com/tconbeer/textual-fastdatatable/pull/154">textual-fastdatatable · #154</a> — escape and truncate bytes values in the cell formatter</li>
-                <li><a href="https://github.com/drt-hub/drt/pull/902">drt · #902</a> — <code>drt serve</code> delivery contract: coalescing, 202 + run id, pluggable auth</li>
             </ul>
         </div>
     </div>
@@ -910,13 +1002,13 @@
 
 <section id="activity" class="section">
     <div class="container">
-        <div class="section-num">// 09 ACTIVITY</div>
+        <div class="tag-badge">09 / Activity</div>
         <h2>Activity</h2>
         <p class="subtitle">What the contribution graph and language mix look like right now.</p>
 
         <div class="activity-grid">
-            <img src="https://github-readme-stats.vercel.app/api?username=Pawansingh3889&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&hide=issues&bg_color=141A3A&title_color=00D4FF&icon_color=00D4FF&text_color=E8E9F3&ring_color=00D4FF" alt="GitHub stats"/>
-            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Pawansingh3889&layout=compact&hide_border=true&bg_color=141A3A&title_color=00D4FF&text_color=E8E9F3&langs_count=8" alt="Top languages"/>
+            <img src="https://github-readme-stats.vercel.app/api?username=Pawansingh3889&show_icons=true&hide_border=true&include_all_commits=true&count_private=true&hide=issues&bg_color=17140F&title_color=C8492E&icon_color=C8492E&text_color=F1ECDF&ring_color=C8492E" alt="GitHub stats"/>
+            <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Pawansingh3889&layout=compact&hide_border=true&bg_color=17140F&title_color=C8492E&text_color=F1ECDF&langs_count=8" alt="Top languages"/>
         </div>
 
         <div style="margin-top: 1.5rem;">
@@ -930,22 +1022,28 @@
 
 <section id="contact" class="section">
     <div class="container">
-        <div class="section-num">// 10 CONTACT</div>
-        <h2>Get in Touch</h2>
+        <div class="tag-badge">10 / Contact</div>
+        <h2 class="cta-heading">Let's build something<br>worth <span class="line2">trusting.</span></h2>
+
         <p class="subtitle">Open to data engineering, data ops, manufacturing analytics, and on-prem AI roles. Especially interested in roles where the data domain genuinely matters and the system has to keep running on a Sunday night.</p>
 
         <div class="contact-grid">
-            <div class="contact-card">
+            <div class="contact-card bracket">
                 <h4>// EMAIL</h4>
                 <a href="mailto:pawankapkoti3889@gmail.com">pawankapkoti3889@gmail.com</a>
                 <div class="desc">Best for first contact. Replies same day, weekdays.</div>
             </div>
-            <div class="contact-card">
+            <div class="contact-card bracket">
+                <h4>// PHONE</h4>
+                <a href="tel:+919557531695">+91 95575 31695</a>
+                <div class="desc">Available immediately, no notice period.</div>
+            </div>
+            <div class="contact-card bracket">
                 <h4>// LINKEDIN</h4>
                 <a href="https://www.linkedin.com/in/pawan-singh-kapkoti-100176347">linkedin.com/in/pawan-singh-kapkoti</a>
                 <div class="desc">Connect for roles, OSS collaboration, or a manufacturing-data chat.</div>
             </div>
-            <div class="contact-card">
+            <div class="contact-card bracket">
                 <h4>// COMMUNITY</h4>
                 <a href="https://discord.gg/gBr77yYPkD">discord.gg/gBr77yYPkD</a>
                 <div class="desc">The Discord for the governed stack. Questions, show and tell, release feed.</div>
@@ -956,27 +1054,36 @@
         <p class="subtitle">Three honest stages — same flow whether the work is a pipeline, a dashboard, or shipping a tool to PyPI.</p>
 
         <div class="process">
-            <div class="process-step">
+            <div class="process-step bracket">
                 <div class="num">01</div>
                 <h4>Discovery</h4>
                 <p>Read the source. Read the data. Talk to the people who actually run the line. Confirm the problem is the problem before writing code.</p>
             </div>
-            <div class="process-step">
+            <div class="process-step bracket">
                 <div class="num">02</div>
                 <h4>Architecture</h4>
                 <p>Sketch the smallest thing that delivers value. Pick boring, well-documented tools. Write the tests first when the contract matters.</p>
             </div>
-            <div class="process-step">
+            <div class="process-step bracket">
                 <div class="num">03</div>
                 <h4>Delivery</h4>
                 <p>Ship in CI behind a green build. Document the trade-offs. Set up a way for the next person (sometimes me) to understand it without paging me.</p>
             </div>
+        </div>
+
+        <div class="social-row">
+            <a href="https://github.com/Pawansingh3889"><span>01 GITHUB</span><span class="si">&#8599;</span></a>
+            <a href="https://www.linkedin.com/in/pawan-singh-kapkoti-100176347"><span>02 LINKEDIN</span><span class="si">&#8599;</span></a>
+            <a href="https://pypi.org/user/pawansingh3889/"><span>03 PYPI</span><span class="si">&#8599;</span></a>
+            <a href="https://huggingface.co/pawankapkoti"><span>04 HUGGING FACE</span><span class="si">&#8599;</span></a>
+            <a href="https://discord.gg/gBr77yYPkD"><span>05 DISCORD</span><span class="si">&#8599;</span></a>
         </div>
     </div>
 </section>
 
 <footer class="footer">
     <div class="container">
+        <div class="tagline">Data &middot; Governance &middot; AI &middot; On-prem</div>
         <div class="copy">© 2026 Pawan Singh Kapkoti</div>
         <div class="rights">All rights reserved</div>
         <div class="heart">Single file. No framework, no tracker, no cloud.</div>
@@ -984,11 +1091,10 @@
 </footer>
 
 </main>
-</div>
 
 <script>
 (function () {
-    // ---- Self-contained typing animation (replaces external readme-typing-svg) ----
+    // ---- Self-contained typing animation ----
     (function () {
         var el = document.getElementById('typingText');
         if (!el) return;
@@ -1017,7 +1123,7 @@
         render();
     })();
 
-    // ---- interactive governed pipeline (unchanged) ----
+    // ---- interactive governed pipeline ----
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var flow = document.getElementById('gqFlow');
     if (!flow) return;
@@ -1075,91 +1181,52 @@
 
 <script>
 (function () {
-    const layer = document.getElementById('particles');
-    if (!layer) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduced) return;
+    // ---- nav overlay toggle ----
+    var body = document.body;
+    var menuBtn = document.getElementById('menuBtn');
+    var closeBtn = document.getElementById('menuCloseBtn');
+    var overlay = document.getElementById('navOverlay');
+    function openNav() { body.classList.add('nav-open'); menuBtn.setAttribute('aria-expanded', 'true'); overlay.setAttribute('aria-hidden', 'false'); }
+    function closeNav() { body.classList.remove('nav-open'); menuBtn.setAttribute('aria-expanded', 'false'); overlay.setAttribute('aria-hidden', 'true'); }
+    menuBtn.addEventListener('click', function () { body.classList.contains('nav-open') ? closeNav() : openNav(); });
+    closeBtn.addEventListener('click', closeNav);
+    overlay.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeNav); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
 
-    const rand = (min, max) => Math.random() * (max - min) + min;
-    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
-
-    const gradients = [
-        'linear-gradient(45deg, #00d4ff, #0095c8)',
-        'linear-gradient(45deg, #5ce0ff, #00d4ff)',
-        'linear-gradient(45deg, #7c5cff, #4b3aff)',
-        'linear-gradient(45deg, #00b8a9, #00d4ff)',
-        'linear-gradient(45deg, #ffffff, #5ce0ff)'
-    ];
-    const emojis = ['🐍', '🐘', '⚡', '☁️', '🐳', '🛡️', '🧪', '📊', '⚙️', '🤖', '🧠', '📈', '🔧', '💡', '🚀', '🎯', '🔍', '📦', '🪝', '🧬'];
-
-    const frag = document.createDocumentFragment();
-
-    for (let i = 0; i < 28; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle';
-        const w = rand(3, 9);
-        d.style.width = `${w}px`;
-        d.style.height = `${w}px`;
-        d.style.background = pick(gradients);
-        d.style.borderRadius = Math.random() > 0.45 ? '50%' : '20%';
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float ${rand(18, 32)}s ease-in-out infinite ${rand(0, 12)}s`;
-        d.style.transform = `rotate(${rand(0, 360)}deg)`;
-        frag.appendChild(d);
-    }
-
-    for (let i = 0; i < 20; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle-emoji';
-        d.textContent = pick(emojis);
-        d.style.fontSize = `${rand(14, 28)}px`;
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float-soft ${rand(22, 38)}s ease-in-out infinite ${rand(0, 14)}s`;
-        frag.appendChild(d);
-    }
-
-    for (let i = 0; i < 12; i++) {
-        const d = document.createElement('div');
-        d.className = 'particle-geo';
-        const w = rand(18, 42);
-        d.style.width = `${w}px`;
-        d.style.height = `${w}px`;
-        d.style.border = `2px solid rgba(0, 212, 255, ${rand(0.18, 0.38).toFixed(2)})`;
-        d.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        d.style.left = `${rand(0, 100)}%`;
-        d.style.top = `${rand(0, 100)}%`;
-        d.style.animation = `float ${rand(28, 48)}s ease-in-out infinite ${rand(0, 12)}s`;
-        d.style.transform = `rotate(${rand(0, 360)}deg)`;
-        frag.appendChild(d);
-    }
-
-    layer.appendChild(frag);
-
-    let raf = null, mx = 0, my = 0;
-    window.addEventListener('mousemove', (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-            document.documentElement.style.setProperty('--mx', `${mx}px`);
-            document.documentElement.style.setProperty('--my', `${my}px`);
+    // ---- scroll progress ticks ----
+    var ticksEl = document.getElementById('scrollTicks');
+    if (ticksEl) {
+        var N = 26, ticks = [];
+        for (var i = 0; i < N; i++) {
+            var t = document.createElement('div');
+            t.className = 'tick';
+            ticksEl.appendChild(t);
+            ticks.push(t);
+        }
+        var raf = null;
+        function update() {
             raf = null;
-        });
-    }, { passive: true });
+            var doc = document.documentElement;
+            var max = doc.scrollHeight - doc.clientHeight;
+            var frac = max > 0 ? doc.scrollTop / max : 0;
+            var active = Math.round(frac * (N - 1));
+            ticks.forEach(function (t, i) { t.classList.toggle('active', i === active); });
+        }
+        window.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+        update();
+    }
 
-    const sections = document.querySelectorAll('.section, .hero');
-    sections.forEach(s => s.classList.add('reveal'));
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('in');
-                io.unobserve(e.target);
-            }
+    // ---- reveal on scroll ----
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    var sections = document.querySelectorAll('.section, .hero');
+    sections.forEach(function (s) { s.classList.add('reveal'); });
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
         });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    sections.forEach(s => io.observe(s));
+    sections.forEach(function (s) { io.observe(s); });
 })();
 </script>
 
